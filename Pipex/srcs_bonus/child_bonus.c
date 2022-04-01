@@ -6,7 +6,7 @@
 /*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 11:32:04 by mrolande          #+#    #+#             */
-/*   Updated: 2022/02/11 12:15:05 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/03/29 17:32:27 by mrolande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static char	*get_cmd(char **paths, char *cmd)
 	char	*tmp;
 	char	*command;
 
+	if (access(cmd, 0) == 0)
+		return (cmd);
 	while (*paths)
 	{
 		tmp = ft_strjoin(*paths, "/");

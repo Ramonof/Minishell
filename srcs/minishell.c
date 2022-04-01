@@ -29,12 +29,20 @@ int	main(void)
 	free(line);
 	// *************
 	// readline working
-	line = readline("mypromt$ ");
-	if (line)
+	line = readline(">> ");
+	while (line)
 	{
-		printf("%s\n", line);
-		free(line);
-	}
+		if (strlen(line) > 0)
+		{
+			add_history(line);
+    	}
+		if (line)
+		{
+			printf("%s\n", line);
+			free(line);
+		}
+		line = readline(">> ");
+  	}
 	// ************* (183)
 	return (0);
 }

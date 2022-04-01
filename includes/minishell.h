@@ -6,7 +6,7 @@
 /*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 11:08:41 by mrolande          #+#    #+#             */
-/*   Updated: 2022/03/26 11:51:21 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/03/30 11:26:13 by mrolande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,21 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
+
+typedef struct s_cmd
+{
+	int		cmd_nmbs;       // Количество комманд
+	int		pipe_nmbs;      // Количество труб
+	char	*env_path;      // Константа PATH
+	char	**cmd_paths;    // Константа PATH, разделенная
+	char	*cmd;           // Команда
+	char	**cmd_args;     // Флажки
+	int		here_doc;       // Флажок <<
+	pid_t	pid;            // Для каждого процесса свой
+	int		infile;         // Вход файл удар
+	int		outfile;        // Выход файл удар
+	int		*pipe;          // Массив дескрипторов связаных функцией pipe
+	int		idx;            // Номер процесса
+}	t_cmd;
 
 #endif
