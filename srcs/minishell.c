@@ -13,7 +13,7 @@
 #include "get_next_line.h"
 #include "minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	int	fd;
 	char *line;
@@ -28,6 +28,10 @@ int	main(void)
 	close(fd);
 	free(line);
 	// *************
+	printf("\nstart\n");
+	if (argc)
+		my_execute(argv[1], envp);
+	printf("\nend\n");
 	// readline working
 	line = readline(">> ");
 	while (line)
