@@ -4,27 +4,37 @@ CC := gcc
 CFLAGS := -Werror -Wall -Wextra -c -lreadline
 SRC_DIR := ./srcs/
 GNL_DIR := ./gnl/
+EXEC_DIR := ./executor/
 OBJ_DIR	= ./obj/
 
-SRC_FILES = minishell.c
+SRC_FILES = minishell.c \
+			error.c
 
 GNL_FILES = get_next_line.c \
 			get_next_line_utils.c
 
+EXEC_FILES = 	executor.c \
+				exec_cmd.c
+
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJ_GNL_FILES = $(GNL_FILES:.c=.o)
+OBJ_EXEC_FILES = $(EXEC_FILES:.c=.o)
 
 OBJ_D_FILES = $(SRC_FILES:.c=.d)
 OBJ_D_GNL_FILES = $(GNL_FILES:.c=.d)
+OBJ_D_EXEC_FILES = $(EXEC_FILES:.c=.d)
 
 SRCS = 	$(addprefix $(SRC_DIR), $(SRC_FILES)) \
-		$(addprefix $(GNL_DIR), $(GNL_FILES))
+		$(addprefix $(GNL_DIR), $(GNL_FILES)) \
+		$(addprefix $(EXEC_DIR), $(EXEC_FILES))
 
 OBJS = 	$(addprefix $(OBJ_DIR), $(OBJ_FILES)) \
-		$(addprefix $(OBJ_DIR), $(OBJ_GNL_FILES))
+		$(addprefix $(OBJ_DIR), $(OBJ_GNL_FILES)) \
+		$(addprefix $(OBJ_DIR), $(OBJ_EXEC_FILES))
 
 OBJS_D = 	$(addprefix $(OBJ_DIR), $(OBJ_D_FILES)) \
-			$(addprefix $(OBJ_DIR), $(OBJ_D_GNL_FILES))
+			$(addprefix $(OBJ_DIR), $(OBJ_D_GNL_FILES)) \
+			$(addprefix $(OBJ_DIR), $(OBJ_D_EXEC_FILES))
 
 HEADER := -I includes/
 RM := rm -rf
@@ -38,6 +48,9 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER) -MMD -lreadline
 
 $(OBJ_DIR)%.o: $(GNL_DIR)%.c
+	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER) -MMD -lreadline
+
+$(OBJ_DIR)%.o: $(EXEC_DIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER) -MMD -lreadline
 
 $(NAME): obj $(OBJS) $(LIBFT)
@@ -60,6 +73,6 @@ fclean: clean
 
 re: fclean all
 
--include $(OBJS_D) $(OBJS_D_B)
+-include $(OBJS_D)
 
 .PHONY: libft all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 11:08:41 by mrolande          #+#    #+#             */
-/*   Updated: 2022/03/30 11:26:13 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:13:20 by mrolande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
+
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_cmd
 {
@@ -34,5 +37,9 @@ typedef struct s_cmd
 	int		*pipe;          // Массив дескрипторов связаных функцией pipe
 	int		idx;            // Номер процесса
 }	t_cmd;
+
+/* executor.c */
+int		my_execute(char *cmd, char **envp);
+void	exec_cmd(char *cmd, char **cmd_arg, char **envp);
 
 #endif
