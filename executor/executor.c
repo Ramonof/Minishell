@@ -29,13 +29,8 @@ int	my_execute(t_app app, char **envp)
 		// 	i++;
 		// }
 
-<<<<<<< HEAD
-		//dup2(app.cmd_array[0].input_file, 0);
-		exec_cmd(app.cmd_array[0].cmd, app.cmd_array[0].cmd_flags, envp);
-=======
 		dup2(0, 0);
 		exec_cmd(app.cmd_array[0].cmd, app.cmd_array[0].cmd_args, envp);
->>>>>>> 8ed4b8ee8c34f74ef0720409a65b20b1c0305bc3
 	}
 	waitpid(-1, NULL, 0);
 	return (0);
