@@ -15,23 +15,13 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	fd;
+	//int	fd;
 	char *line;
+	t_app app;
 
-	// libft working
-	printf("Hello LIBFT!\n");
-	// *************
-	// gnl working
-	fd = open("Hello.txt",O_RDONLY);
-	get_next_line(fd, &line, 0);
-	printf("%s\n", line);
-	close(fd);
-	free(line);
-	// *************
-	printf("\nstart\n");
-	if (argc)
-		my_execute(argv[1], envp);
-	printf("\nend\n");
+	if (argc || argv)
+		printf("pass\n");
+
 	// readline working
 	line = readline(">> ");
 	while (line)
@@ -40,6 +30,15 @@ int	main(int argc, char **argv, char **envp)
 		{
 			add_history(line);
     	}
+		/**/
+		app.line = line;
+
+		printf("Line: %s\n\n", app.line);
+
+		fill_commands_array(&app);
+
+		my_execute(app, envp);
+		/**/
 		if (line)
 		{
 			printf("%s\n", line);

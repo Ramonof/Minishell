@@ -12,17 +12,25 @@
 
 #include "minishell.h"
 
-int	my_execute(char *cmd, char **envp)
+int	my_execute(t_app app, char **envp)
 {
 	//char	*cmd = "cat";
 	//char	*cmd_arg = "cat ", "-m";
-	int		fd = open("Hello.txt",O_RDONLY);
-	char **cmd_args = ft_split(cmd, ' ');
+	// int		fd = open("Hello.txt",O_RDONLY);
+	// char **cmd_args = ft_split(cmd, ' ');
 	pid_t pid = fork();
 	if (!pid)
 	{
-		dup2(fd, 0);
-		exec_cmd(cmd_args[0], cmd_args, envp);
+		printf("here %s\n", app.cmd_array[0].cmd);
+		// int i = 0;
+		// while (app.cmd_array[0].cmd_flags[i])
+		// {
+		// 	printf("here %s\n", app.cmd_array[0].cmd_flags[i]);
+		// 	i++;
+		// }
+
+		dup2(0, 0);
+		exec_cmd(app.cmd_array[0].cmd, app.cmd_array[0].cmd_flags, envp);
 	}
 	waitpid(-1, NULL, 0);
 	return (0);

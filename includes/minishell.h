@@ -57,7 +57,7 @@ typedef struct s_app
 }	t_app;
 
 /* executor.c */
-int		my_execute(char *cmd, char **envp);
+int		my_execute(t_app app, char **envp);
 void	exec_cmd(char *cmd, char **cmd_arg, char **envp);
 
 /* parser.c */
