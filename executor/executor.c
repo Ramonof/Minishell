@@ -29,7 +29,7 @@ int	my_execute(t_app app, char **envp)
 		// 	i++;
 		// }
 
-		dup2(0, 0);
+		//dup2(app.cmd_array[0].input_file, 0);
 		exec_cmd(app.cmd_array[0].cmd, app.cmd_array[0].cmd_flags, envp);
 	}
 	waitpid(-1, NULL, 0);
