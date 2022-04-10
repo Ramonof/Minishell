@@ -38,8 +38,35 @@ typedef struct s_cmd
 	int		idx;            // Номер процесса
 }	t_cmd;
 
+typedef struct s_command
+{
+	char	*cmd;
+	char	**cmd_args;
+	char	**cmd_flags;
+	char	*input_file;
+	char	*output_file;
+}	t_command;
+
+typedef struct s_app
+{
+	char		*line;
+	char		**tokens;
+	int			cmd_number;
+	int			pipe_number;
+	t_command	*cmd_array;
+}	t_app;
+
 /* executor.c */
 int		my_execute(char *cmd, char **envp);
 void	exec_cmd(char *cmd, char **cmd_arg, char **envp);
+
+/* parser.c */
+void	fill_commands_array(t_app *app);
+
+/* alloc.c */
+void	alloc_commands(t_app *app);
+void	alloc_flags(t_app *app, size_t cmd_i, size_t end_i, size_t cmd_ind);
+void	alloc_args(t_app *app, size_t cmd_i, size_t end_i, size_t cmd_ind);
+
 
 #endif
