@@ -13,7 +13,6 @@
 #include "minishell.h"
 
 static void	get_commands(t_app *app);
-static void	get_flags(t_app *app, size_t cmd_i, size_t end_i, size_t cmd_ind);
 static void	get_args(t_app *app, size_t cmd_i, size_t end_i, size_t cmd_ind);
 
 void	fill_commands_array(t_app *app)
@@ -37,7 +36,6 @@ static void	get_commands(t_app *app)
 	{
 		if (app->tokens[i][0] == '|')
 		{
-			get_flags(app, cmd_i, i, array_index - 1);
 			get_args(app, cmd_i, i, array_index - 1);
 			app->cmd_array[array_index].cmd = app->tokens[i + 1];
 			cmd_i = i + 1;
@@ -47,29 +45,7 @@ static void	get_commands(t_app *app)
 			break ;
 		i++;
 	}
-	get_flags(app, cmd_i, i, array_index - 1);
 	get_args(app, cmd_i, i, array_index - 1);
-}
-
-static void	get_flags(t_app *app, size_t cmd_i, size_t end_i, size_t cmd_ind)
-{
-	size_t	i;
-	size_t	flag_i;
-
-	alloc_flags(app, cmd_i, end_i, cmd_ind);
-	if (app->cmd_array[cmd_ind].cmd_flags == NULL)
-		return ;
-	i = cmd_i + 1;
-	flag_i = 0;
-	while (i < end_i)
-	{
-		if (app->tokens[i][0] == '-')
-		{
-			app->cmd_array[cmd_ind].cmd_flags[flag_i] = app->tokens[i];
-			flag_i++;
-		}
-		i++;
-	}
 }
 
 static void	get_args(t_app *app, size_t cmd_i, size_t end_i, size_t cmd_ind)
@@ -78,15 +54,13 @@ static void	get_args(t_app *app, size_t cmd_i, size_t end_i, size_t cmd_ind)
 	size_t	arg_i;
 
 	alloc_args(app, cmd_i, end_i, cmd_ind);
+	app->cmd_array[cmd_ind].cmd_args[0] = app->tokens[cmd_i];
 	i = cmd_i + 1;
 	arg_i = 0;
 	while (i < end_i)
 	{
-		if (app->tokens[i][0] != '-')
-		{
-			app->cmd_array[cmd_ind].cmd_args[arg_i] = app->tokens[i];
-			arg_i++;
-		}
+		app->cmd_array[cmd_ind].cmd_args[arg_i] = app->tokens[i];
+		arg_i++;
 		i++;
 	}
 }
