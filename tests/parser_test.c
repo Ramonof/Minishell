@@ -23,10 +23,6 @@ int main()
 
 		if (app.cmd_array[i].cmd_flags == NULL)
 			continue;
-		for (size_t j = 0; app.cmd_array[i].cmd_flags[j]; j++)
-		{
-			printf("flag: %s\n", app.cmd_array[i].cmd_flags[j]);
-		}
 		for (size_t j = 0; app.cmd_array[i].cmd_args[j]; j++)
 		{
 			printf("arg: %s\n", app.cmd_array[i].cmd_args[j]);
