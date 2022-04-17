@@ -13,6 +13,8 @@
 #include "get_next_line.h"
 #include "minishell.h"
 
+static void	clean_memory(t_app *app);
+
 int	main(int argc, char **argv, char **envp)
 {
 	//int	fd;
@@ -43,9 +45,23 @@ int	main(int argc, char **argv, char **envp)
 		{
 			printf("%s\n", line);
 			free(line);
+			line = NULL;
+			clean_memory(&app);
 		}
 		line = readline(">> ");
   	}
 	// ************* (183)
 	return (0);
+}
+
+static void	clean_memory(t_app *app)
+{
+	size_t	i;
+
+	i = 0;
+	while (app->tokens[i])
+	{
+		free(app->tokens[i]);
+		i++;
+	}
 }

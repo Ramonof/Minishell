@@ -66,5 +66,7 @@ void	fill_commands_array(t_app *app);
 void	alloc_commands(t_app *app);
 void	alloc_args(t_app *app, size_t cmd_i, size_t end_i, size_t cmd_ind);
 
+/* tokens_check.c */
+void	tokens_check(char **tokens);
 
 #endif
