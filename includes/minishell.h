@@ -38,6 +38,14 @@ typedef struct s_cmd
 	int		idx;            // Номер процесса
 }	t_cmd;
 
+typedef	struct	s_data
+{
+	char		**env;
+	int			fd_in;
+	int			fd_out;
+	char		*pwd;
+}				t_data;
+
 typedef struct s_command
 {
 	char	*cmd;
@@ -58,6 +66,7 @@ typedef struct s_app
 /* executor.c */
 int		my_execute(t_app app, char **envp);
 void	exec_cmd(char *cmd, char **cmd_arg, char **envp);
+void	close_pipes(t_cmd *pipex);
 
 /* parser.c */
 void	fill_commands_array(t_app *app);
@@ -68,5 +77,14 @@ void	alloc_args(t_app *app, size_t cmd_i, size_t end_i, size_t cmd_ind);
 
 /* tokens_check.c */
 void	tokens_check(char **tokens);
+
+/* error.c */
+void	errno_exit(char *err);
+void	msg_pipe(char *err);
+void	error_exit(char *err);
+int		ret_err(char *msg);
+
+/* strcmp.c */
+int	ft_strcmp(const char *str1, const char *str2);
 
 #endif

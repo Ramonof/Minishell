@@ -31,3 +31,9 @@ void	errno_exit(char *err)
 	perror(err);
 	exit (1);
 }
+
+int	ret_err(char *msg)
+{
+	write(2, msg, ft_strlen(msg));
+	return (1);
+}
