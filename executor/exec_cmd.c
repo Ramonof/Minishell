@@ -45,15 +45,57 @@ char	*find_path(char **envp)
 	return (*envp + 5);
 }
 
-void	exec_cmd(char *cmd, char **cmd_arg, char **envp)
+// void	exec_cmd(char *cmd, char **cmd_arg, char **envp)
+// {
+// 	char *env_path;
+// 	char **cmd_paths;
+
+// 	env_path = find_path(envp);
+// 	cmd_paths = ft_split(env_path, ':');
+// 	cmd = get_cmd(cmd_paths, cmd);
+// 	if (execve(cmd, cmd_arg, envp) < 0)
+// 		printf("error");
+// 	exit(1);
+// }
+
+static void	sub_dup2(int zero, int first)
+{
+	if (dup2(zero, 0) < 0)
+	{
+		printf("exit\n");
+		error_exit("dup2");
+		exit(1);
+	}
+	if (dup2(first, 1) < 0)
+	{
+		printf("exit\n");
+		error_exit("dup2");
+		exit(1);
+	}
+}
+
+void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 {
 	char *env_path;
 	char **cmd_paths;
 
-	env_path = find_path(envp);
-	cmd_paths = ft_split(env_path, ':');
-	cmd = get_cmd(cmd_paths, cmd);
-	if (execve(cmd, cmd_arg, envp) < 0)
-		printf("error");
-	exit(1);
+	p.pid = fork();
+	if (p.pid < 0)
+		write(2, "fork", ft_strlen("fork"));
+	if (!p.pid)
+	{
+		if (p.idx == 0)
+			sub_dup2(p.infile, p.pipe[1]);
+		else if (p.idx == p.cmd_nmbs - 1)
+			sub_dup2(p.pipe[2 * p.idx - 2], p.outfile);
+		else
+			sub_dup2(p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
+		close_pipes(&p);
+		env_path = find_path(envp);
+		cmd_paths = ft_split(env_path, ':');
+		cmd_st.cmd = get_cmd(cmd_paths, cmd_st.cmd);
+		if (execve(cmd_st.cmd, cmd_st.cmd_args, envp) < 0)
+			printf("error");
+		exit(1);
+	}
 }

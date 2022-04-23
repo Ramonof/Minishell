@@ -36,7 +36,7 @@ typedef struct s_cmd
 	int		outfile;        // Выход файл удар
 	int		*pipe;          // Массив дескрипторов связаных функцией pipe
 	int		idx;            // Номер процесса
-}	t_cmd;
+}	t_pipex;
 
 typedef	struct	s_data
 {
@@ -65,8 +65,8 @@ typedef struct s_app
 
 /* executor.c */
 int		my_execute(t_app app, char **envp);
-void	exec_cmd(char *cmd, char **cmd_arg, char **envp);
-void	close_pipes(t_cmd *pipex);
+void	exec_cmd(t_pipex p, t_command cmd_st, char **envp);
+void	close_pipes(t_pipex *pipex);
 
 /* parser.c */
 void	fill_commands_array(t_app *app);
