@@ -63,6 +63,12 @@ typedef struct s_app
 	t_command	*cmd_array;
 }	t_app;
 
+typedef struct s_parser
+{
+	int	opened_quotes;
+}	t_parser;
+
+
 /* executor.c */
 int		my_execute(t_app app, char **envp);
 void	exec_cmd(t_pipex p, t_command cmd_st, char **envp);
@@ -86,5 +92,14 @@ int		ret_err(char *msg);
 
 /* strcmp.c */
 int	ft_strcmp(const char *str1, const char *str2);
+
+/* split_tokens.c */
+char	**split_tokens(char **tokens, char *line);
+
+/* parser_utils.c */
+char	**array_add(char **array, char *str);
+char	*str_range_cpy(char *str, size_t start, size_t end);
+char	*str_insert(char *str, char *to_insert, size_t start, size_t end);
+int		find_chr(const char *s, int c);
 
 #endif

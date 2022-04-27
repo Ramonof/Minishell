@@ -18,7 +18,9 @@ static void	get_args(t_app *app, size_t cmd_i, size_t end_i, size_t cmd_ind);
 
 void	fill_commands_array(t_app *app)
 {
-	app->tokens = ft_split(app->line, ' ');
+	app->tokens = malloc(1);
+	app->tokens[0] = NULL;
+	app->tokens = split_tokens(app->tokens, app->line);
 	replace_env_vars(app->tokens);
 	alloc_commands(app);
 	get_commands(app);
