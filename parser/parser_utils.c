@@ -5,7 +5,7 @@ size_t	array_len(char **array)
 	size_t	size;
 
 	if (!array)
-		return 0;
+		return (0);
 	size = 1;
 	while (array[size - 1])
 		size++;
