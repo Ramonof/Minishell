@@ -63,12 +63,6 @@ typedef struct s_app
 	t_command	*cmd_array;
 }	t_app;
 
-typedef struct s_parser
-{
-	int	opened_quotes;
-}	t_parser;
-
-
 /* executor.c */
 int		my_execute(t_app app, char **envp);
 void	exec_cmd(t_pipex p, t_command cmd_st, char **envp);
