@@ -12,36 +12,17 @@
 
 #include "minishell.h"
 
-static void	replace_env_vars(char **tokens);
 static void	get_commands(t_app *app);
 static void	get_args(t_app *app, size_t cmd_i, size_t end_i, size_t cmd_ind);
 
 void	fill_commands_array(t_app *app)
 {
-	app->tokens = malloc(1);
+	app->tokens = malloc(sizeof(char *));
 	app->tokens[0] = NULL;
 	app->tokens = split_tokens(app->tokens, app->line);
-	replace_env_vars(app->tokens);
+	expand_tokens(app->tokens);
 	alloc_commands(app);
 	get_commands(app);
-}
-
-static void	replace_env_vars(char **tokens)
-{
-	size_t	i;
-	char	*env_var;
-
-	i = 0;
-	while (tokens[i])
-	{
-		if (tokens[i][0] == '$')
-		{
-			env_var = getenv(tokens[i] + 1);
-			free(tokens[i]);
-			tokens[i] = env_var;
-		}
-		i++;
-	}
 }
 
 static void	get_commands(t_app *app)

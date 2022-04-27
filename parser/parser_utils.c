@@ -6,9 +6,10 @@ size_t	array_len(char **array)
 
 	if (!array)
 		return (0);
-	size = 1;
-	while (array[size - 1])
+	size = 0;
+	while (array[size])
 		size++;
+	size++;
 	return (size);
 }
 
@@ -36,7 +37,9 @@ char	*str_range_cpy(char *str, size_t start, size_t end)
 	size_t	i;
 	size_t	j;
 
-	new_str = malloc(end - start + 2);
+	if (!str)
+		return (str);
+	new_str = malloc(end - start + 3);
 	i = start;
 	j = 0;
 	while (str[i] && i < end)
@@ -56,12 +59,19 @@ char	*str_insert(char *str, char *to_insert, size_t start, size_t end)
 	char	*ending;
 	char	*temp;
 
-	beginning = str_range_cpy(str, 0, start - 1);
+	beginning = str_range_cpy(str, 0, start);
 	ending = str_range_cpy(str, end + 1, ft_strlen(str) - 1);
-	new_str = ft_strjoin(beginning, to_insert);
-	temp = new_str;
-	new_str = ft_strjoin(new_str, ending);
-	free(temp);
+	if (to_insert)
+	{
+		new_str = ft_strjoin(beginning, to_insert);
+		temp = new_str;
+		new_str = ft_strjoin(new_str, ending);
+		free(temp);
+	}
+	else
+	{
+		new_str = ft_strjoin(beginning, ending);
+	}
 	free(beginning);
 	free(ending);
 	return (new_str);

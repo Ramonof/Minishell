@@ -96,4 +96,7 @@ char	*str_range_cpy(char *str, size_t start, size_t end);
 char	*str_insert(char *str, char *to_insert, size_t start, size_t end);
 int		find_chr(const char *s, int c);
 
+/* expand_tokens.c */
+void    expand_tokens(char **tokens);
+
 #endif
