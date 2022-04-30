@@ -39,7 +39,8 @@ int	main(int argc, char **argv, char **envp)
 
 		fill_commands_array(&app);
 
-		my_execute(app, envp);
+		//my_execute(app, envp);
+		start_my_execute(app, envp);
 		/**/
 		if (line)
 		{

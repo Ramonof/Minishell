@@ -89,8 +89,8 @@ int	my_execute(t_app app, char **envp)
 
 int	start_my_execute(t_app app, char **envp)
 {
-	if (ft_strncmp(app.cmd_array->cmd, "cd", 3))
-		printf("here be cd");
+	if (!ft_strncmp(app.cmd_array[0].cmd, "cd", 3))
+		handle_cd(app.cmd_array[0]); //printf("here be cd\n");
 	else
 		return (my_execute(app, envp));
 	return (1);

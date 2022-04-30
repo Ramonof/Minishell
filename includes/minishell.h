@@ -64,9 +64,13 @@ typedef struct s_app
 }	t_app;
 
 /* executor.c */
+int		start_my_execute(t_app app, char **envp);
 int		my_execute(t_app app, char **envp);
 void	exec_cmd(t_pipex p, t_command cmd_st, char **envp);
 void	close_pipes(t_pipex *pipex);
+
+/* cd */
+void	handle_cd(t_command cmd_st);
 
 /* parser.c */
 void	fill_commands_array(t_app *app);

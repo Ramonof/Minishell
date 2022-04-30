@@ -95,7 +95,7 @@ void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 		cmd_paths = ft_split(env_path, ':');
 		cmd_st.cmd = get_cmd(cmd_paths, cmd_st.cmd);
 		if (execve(cmd_st.cmd, cmd_st.cmd_args, envp) < 0)
-			printf("error");
+			printf("error: ");
 		exit(1);
 	}
 }

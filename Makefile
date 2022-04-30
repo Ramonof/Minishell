@@ -15,7 +15,8 @@ GNL_FILES = get_next_line.c \
 			get_next_line_utils.c
 
 EXEC_FILES = 	executor.c \
-				exec_cmd.c
+				exec_cmd.c \
+				cd.c
 
 PARS_FILES =	parser.c \
 				alloc.c \
