@@ -37,29 +37,38 @@ void	close_pipes(t_pipex *pipex)
 	}
 }
 
-// int	my_execute(t_app app, char **envp)
-// {
-// 	//char	*cmd = "cat";
-// 	//char	*cmd_arg = "cat ", "-m";
-// 	// int		fd = open("Hello.txt",O_RDONLY);
-// 	// char **cmd_args = ft_split(cmd, ' ');
-// 	pid_t pid = fork();
-// 	if (!pid)
-// 	{
-// 		printf("here %s\n", app.cmd_array[0].cmd);
-// 		// int i = 0;
-// 		// while (app.cmd_array[0].cmd_flags[i])
-// 		// {
-// 		// 	printf("here %s\n", app.cmd_array[0].cmd_flags[i]);
-// 		// 	i++;
-// 		// }
+char	*find_path(char **envp)
+{
+	while (ft_strncmp("PATH", *envp, 4))
+		envp++;
+	if (!*envp)
+		return (NULL);
+	return (*envp + 5);
+}
 
-// 		dup2(0, 0);
-// 		exec_cmd(app.cmd_array[0].cmd, app.cmd_array[0].cmd_args, envp);
-// 	}
-// 	waitpid(-1, NULL, 0);
-// 	return (0);
-// }
+void	parent_free(t_pipex *pipex, int mode)
+{
+	int	i;
+
+	i = 0;
+	// close(pipex->infile);
+	// close(pipex->outfile);
+	// if (pipex->here_doc)
+	// 	unlink(".heredoc_tmp");
+	while (pipex->cmd_paths[i])
+	{
+		free(pipex->cmd_paths[i]);
+		i++;
+	}
+	free(pipex->cmd_paths);
+	free(pipex->pipe);
+	if (mode == 1)
+	{
+		// msg_error("Pipe");
+		printf("Pipe");
+		exit(1);
+	}
+}
 
 int	my_execute(t_app app, char **envp)
 {
@@ -70,6 +79,10 @@ int	my_execute(t_app app, char **envp)
 	pipex.pipe_nmbs = 2 * (app.cmd_number - 1);
 	pipex.cmd_nmbs = app.cmd_number;
 	pipex.pipe = (int *)malloc(sizeof(int) * pipex.pipe_nmbs);
+	pipex.env_path = find_path(envp);
+	pipex.cmd_paths = ft_split(pipex.env_path, ':');
+	if (!pipex.cmd_paths)
+		return (ret_err("malc")); //pipe_free(&pipex);
 	printf("%s\n", app.cmd_array[0].cmd_args[0]);
 	if (!pipex.pipe)
 		return (ret_err("Pipe"));
@@ -83,14 +96,16 @@ int	my_execute(t_app app, char **envp)
 	close_pipes(&pipex);
 	while (pipex.idx--)
 		waitpid(-1, NULL, 0);
-	//parent_free(&pipex, 0);
+	parent_free(&pipex, 0);
 	return (0);
 }
 
 int	start_my_execute(t_app app, char **envp)
 {
 	if (!ft_strncmp(app.cmd_array[0].cmd, "cd", 3))
-		handle_cd(app.cmd_array[0]); //printf("here be cd\n");
+		handle_cd(app.cmd_array[0], envp); //printf("here be cd\n");
+	else if (!ft_strncmp(app.cmd_array[0].cmd, "test", 5))
+		printf("memory test\n");
 	else
 		return (my_execute(app, envp));
 	return (1);

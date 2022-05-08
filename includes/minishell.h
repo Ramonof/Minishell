@@ -70,7 +70,7 @@ void	exec_cmd(t_pipex p, t_command cmd_st, char **envp);
 void	close_pipes(t_pipex *pipex);
 
 /* cd */
-void	handle_cd(t_command cmd_st);
+void	handle_cd(t_command cmd_st, char **envp);
 
 /* parser.c */
 void	fill_commands_array(t_app *app);

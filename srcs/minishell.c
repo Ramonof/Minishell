@@ -35,16 +35,14 @@ int	main(int argc, char **argv, char **envp)
 		/**/
 		app.line = line;
 
-		printf("Line: %s\n\n", app.line);
+		printf("Line: %s\n", app.line);
 
 		fill_commands_array(&app);
 
-		//my_execute(app, envp);
 		start_my_execute(app, envp);
 		/**/
 		if (line)
 		{
-			printf("%s\n", line);
 			free(line);
 			line = NULL;
 			clean_memory(&app);
