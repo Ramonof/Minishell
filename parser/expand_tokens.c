@@ -35,6 +35,7 @@ static char	*expand_token(t_app *app, char *token)
 			j = ++i;
 			if (token[i] == '?')
 			{
+				// need to fix $PATH$? and $?$PATH case
 				env = ft_itoa(app->last_cmd_result);
 				temp = token;
 				token = env;
