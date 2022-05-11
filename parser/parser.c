@@ -20,7 +20,7 @@ void	fill_commands_array(t_app *app)
 	app->tokens = malloc(sizeof(char *));
 	app->tokens[0] = NULL;
 	app->tokens = split_tokens(app->tokens, app->line);
-	expand_tokens(app->tokens);
+	expand_tokens(app, app->tokens);
 	alloc_commands(app);
 	get_commands(app);
 }

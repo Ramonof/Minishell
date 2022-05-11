@@ -21,6 +21,8 @@ int	main(int argc, char **argv, char **envp)
 	char *line;
 	t_app app;
 
+	app.last_cmd_result = -1;
+
 	if (argc || argv)
 		printf("pass\n");
 

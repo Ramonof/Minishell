@@ -60,6 +60,7 @@ typedef struct s_app
 	char		**tokens;
 	int			cmd_number;
 	int			pipe_number;
+	int			last_cmd_result;
 	t_command	*cmd_array;
 }	t_app;
 
@@ -101,6 +102,6 @@ char	*str_insert(char *str, char *to_insert, size_t start, size_t end);
 int		find_chr(const char *s, int c);
 
 /* expand_tokens.c */
-void    expand_tokens(char **tokens);
+void    expand_tokens(t_app *app, char **tokens);
 
 #endif
