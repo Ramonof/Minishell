@@ -13,8 +13,6 @@
 #include "get_next_line.h"
 #include "minishell.h"
 
-static void	clean_memory(t_app *app);
-
 int	main(int argc, char **argv, char **envp)
 {
 	//int	fd;
@@ -39,7 +37,7 @@ int	main(int argc, char **argv, char **envp)
 
 		printf("Line: %s\n", app.line);
 
-		fill_commands_array(&app);
+		start_parser(&app);
 
 		start_my_execute(app, envp);
 		/**/
@@ -47,22 +45,9 @@ int	main(int argc, char **argv, char **envp)
 		{
 			free(line);
 			line = NULL;
-			clean_memory(&app);
 		}
 		line = readline(">> ");
   	}
 	// ************* (183)
 	return (0);
-}
-
-static void	clean_memory(t_app *app)
-{
-	size_t	i;
-
-	i = 0;
-	while (app->tokens[i])
-	{
-		free(app->tokens[i]);
-		i++;
-	}
 }

@@ -17,10 +17,14 @@ char	**array_add(char **array, char *str)
 {
 	char	**new_array;
 	size_t	i;
+	size_t	len;
 
-	new_array = malloc((array_len(array) + 1) * sizeof(char *));
+	len = array_len(array);
+	if (len == 0)
+		len++;
+	new_array = malloc((len + 1) * sizeof(char *));
 	i = 0;
-	while (array[i])
+	while (array && array[i])
 	{
 		new_array[i] = array[i];
 		i++;
@@ -38,7 +42,7 @@ char	*str_range_cpy(char *str, size_t start, size_t end)
 	size_t	j;
 
 	if (!str)
-		return (str);
+		return (NULL);
 	new_str = malloc(end - start + 3);
 	i = start;
 	j = 0;
@@ -60,7 +64,7 @@ char	*str_insert(char *str, char *to_insert, size_t start, size_t end)
 	char	*temp;
 
 	beginning = str_range_cpy(str, 0, start);
-	ending = str_range_cpy(str, end + 1, ft_strlen(str) - 1);
+	ending = str_range_cpy(str, end + 1, ft_strlen(str));
 	if (to_insert)
 	{
 		new_str = ft_strjoin(beginning, to_insert);

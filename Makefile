@@ -18,11 +18,7 @@ EXEC_FILES = 	executor.c \
 				exec_cmd.c \
 				cd.c
 
-PARS_FILES =	parser.c \
-				alloc.c \
-				parser_utils.c \
-				split_tokens.c \
-				expand_tokens.c
+PARS_FILES =	parser.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJ_GNL_FILES = $(GNL_FILES:.c=.o)

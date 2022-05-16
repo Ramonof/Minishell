@@ -46,22 +46,16 @@ typedef	struct	s_data
 	char		*pwd;
 }				t_data;
 
-typedef struct s_command
-{
-	char	*cmd;
-	char	**cmd_args;
-	char	*input_file;
-	char	*output_file;
-}	t_command;
-
 typedef struct s_app
 {
 	char		*line;
 	char		**tokens;
+	char		***cmds;
+	int			input_file;
+	int			output_file;
 	int			cmd_number;
 	int			pipe_number;
 	int			last_cmd_result;
-	t_command	*cmd_array;
 }	t_app;
 
 /* executor.c */
@@ -72,13 +66,6 @@ void	close_pipes(t_pipex *pipex);
 
 /* cd */
 void	handle_cd(t_command cmd_st, char **envp);
-
-/* parser.c */
-void	fill_commands_array(t_app *app);
-
-/* alloc.c */
-void	alloc_commands(t_app *app);
-void	alloc_args(t_app *app, size_t cmd_i, size_t end_i, size_t cmd_ind);
 
 /* tokens_check.c */
 void	tokens_check(char **tokens);
@@ -92,16 +79,13 @@ int		ret_err(char *msg);
 /* strcmp.c */
 int	ft_strcmp(const char *str1, const char *str2);
 
-/* split_tokens.c */
-char	**split_tokens(char **tokens, char *line);
+/* parser.c */
+void	start_parser(t_app *app);
 
 /* parser_utils.c */
 char	**array_add(char **array, char *str);
 char	*str_range_cpy(char *str, size_t start, size_t end);
-char	*str_insert(char *str, char *to_insert, size_t start, size_t end);
 int		find_chr(const char *s, int c);
-
-/* expand_tokens.c */
-void    expand_tokens(t_app *app, char **tokens);
+char	*str_insert(char *str, char *to_insert, size_t start, size_t end);
 
 #endif

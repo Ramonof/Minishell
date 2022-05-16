@@ -1,0 +1,1 @@
+gcc main.c parser.c parser_utils.c ../libft/libft.a -I ../includes -lreadline
