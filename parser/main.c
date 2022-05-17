@@ -22,6 +22,7 @@ int	main()
 		if (line)
 		{
 			free(line);
+			free_cmds(&app);
 			line = NULL;
 		}
 		line = readline(">> ");
