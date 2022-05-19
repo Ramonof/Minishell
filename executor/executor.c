@@ -81,9 +81,8 @@ int	my_execute(t_app app, char **envp)
 	pipex.pipe = (int *)malloc(sizeof(int) * pipex.pipe_nmbs);
 	pipex.env_path = find_path(envp);
 	pipex.cmd_paths = ft_split(pipex.env_path, ':');
-	if (!pipex.cmd_paths)
+	if (!pipex.cmd_paths || !pipex.pipe)
 		return (ret_err("malc")); //pipe_free(&pipex);
-	printf("%s\n", app.cmd_array[0].cmd_args[0]);
 	if (!pipex.pipe)
 		return (ret_err("Pipe"));
 	creat_pipes(&pipex);
@@ -91,7 +90,7 @@ int	my_execute(t_app app, char **envp)
 	pipex.idx = -1;
 	while (++(pipex.idx) < app.cmd_number)
 	{
-		exec_cmd(pipex, app.cmd_array[pipex.idx], envp);
+		exec_cmd(pipex, app.cmds[pipex.idx], envp);
 	}
 	close_pipes(&pipex);
 	while (pipex.idx--)
@@ -102,9 +101,9 @@ int	my_execute(t_app app, char **envp)
 
 int	start_my_execute(t_app app, char **envp)
 {
-	if (!ft_strncmp(app.cmd_array[0].cmd, "cd", 3))
-		handle_cd(app.cmd_array[0], envp); //printf("here be cd\n");
-	else if (!ft_strncmp(app.cmd_array[0].cmd, "test", 5))
+	if (!ft_strncmp(app.cmds[0][0], "cd", 3))
+		handle_cd(app.cmds[0], envp); //printf("here be cd\n");
+	else if (!ft_strncmp(app.cmds[0][0], "test", 5))
 		printf("memory test\n");
 	else
 		return (my_execute(app, envp));

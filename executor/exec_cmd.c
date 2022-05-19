@@ -61,7 +61,7 @@ static void	sub_dup2(int zero, int first)
 	}
 }
 
-void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
+void	exec_cmd(t_pipex p, char **cmd_st, char **envp)
 {
 	//char *env_path;
 	//char **cmd_paths;
@@ -80,8 +80,8 @@ void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 		close_pipes(&p);
 		//env_path = find_path(envp);
 		//cmd_paths = ft_split(env_path, ':');
-		cmd_st.cmd = get_cmd(p.cmd_paths, cmd_st.cmd);
-		if (execve(cmd_st.cmd, cmd_st.cmd_args, envp) < 0)
+		cmd_st[0] = get_cmd(p.cmd_paths, cmd_st[0]);
+		if (execve(cmd_st[0], cmd_st, envp) < 0)
 			printf("error: ");
 		exit(1);
 	}

@@ -21,16 +21,16 @@ char	*find_home(char **envp)
 	return (*envp + 5);
 }
 
-void	handle_cd(t_command cmd_st, char **envp)
+void	handle_cd(char **cmd_st, char **envp)
 {
 	char	*homedir;
 
-	if (!cmd_st.cmd_args[1])
+	if (!cmd_st[1])
 	{
 		homedir = find_home(envp);
 		chdir(homedir);
 	}
-	else if (chdir(cmd_st.cmd_args[1]) != 0)
-		perror(cmd_st.cmd_args[1]);
+	else if (chdir(cmd_st[1]) != 0)
+		perror(cmd_st[1]);
 	printf("good?\n");
 }
