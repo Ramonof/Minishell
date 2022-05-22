@@ -81,11 +81,29 @@ int	ft_strcmp(const char *str1, const char *str2);
 
 /* parser.c */
 void	start_parser(t_app *app);
+void	free_cmds(t_app *app);
 
 /* parser_utils.c */
 char	**array_add(char **array, char *str);
+size_t	array_len(char **array);
 char	*str_range_cpy(char *str, size_t start, size_t end);
 int		find_chr(const char *s, int c);
 char	*str_insert(char *str, char *to_insert, size_t start, size_t end);
+
+/* get_tokens.c */
+void	get_tokens(t_app *app);
+
+/* expand_tokens.c */
+void	expand_tokens(t_app *app);
+
+/* alloc_cmds.c */
+void	alloc_cmds(t_app *app);
+void	get_cmds(t_app *app);
+
+/* delete_quotes.c */
+char	*delete_quotes(char *token);
+
+/* array_operations.c */
+char    **array_remove(char **array, size_t index);
 
 #endif

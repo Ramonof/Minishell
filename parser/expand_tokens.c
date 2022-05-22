@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static char	*expand_token(t_app *app, char *token);
+static char	*expand_token(char *token);
 static char	*expand_variable(char *token, size_t *i);
 
 void	expand_tokens(t_app *app)
@@ -10,12 +10,12 @@ void	expand_tokens(t_app *app)
 	i = 0;
 	while (app->tokens[i])
 	{
-		app->tokens[i] = expand_token(app, app->tokens[i]);
+		app->tokens[i] = expand_token(app->tokens[i]);
 		i++;
 	}
 }
 
-static char	*expand_token(t_app *app, char *token)
+static char	*expand_token(char *token)
 {
 	size_t	i;
 

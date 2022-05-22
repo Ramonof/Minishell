@@ -9,10 +9,12 @@ void	start_parser(t_app *app)
 	expand_tokens(app);
 	alloc_cmds(app);
 	get_cmds(app);
+//	for (int i = 0; app->cmds[i]; i++)
+//		printf("%s\n", app->cmds[i][0]);
 	free_tokens(app);
 }
 
-static void	free_tokens(t_app *app)
+void	free_tokens(t_app *app)
 {
 	size_t	i;
 

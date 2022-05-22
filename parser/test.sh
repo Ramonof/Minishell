@@ -1,8 +1,5 @@
-gcc main.c \ 
-parser.c \
-parser_utils.c \
-alloc_cmds.c \
-delete_quotes.c \
+gcc main.c parser.c parser_utils.c alloc_cmds.c delete_quotes.c \
 expand_tokens.c \
 get_tokens.c \
+array_operations.c \
 ../libft/libft.a -I ../includes -lreadline
