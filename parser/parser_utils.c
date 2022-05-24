@@ -13,28 +13,6 @@ size_t	array_len(char **array)
 	return (size);
 }
 
-char	**array_add(char **array, char *str)
-{
-	char	**new_array;
-	size_t	i;
-	size_t	len;
-
-	len = array_len(array);
-	if (len == 0)
-		len++;
-	new_array = malloc((len + 1) * sizeof(char *));
-	i = 0;
-	while (array && array[i])
-	{
-		new_array[i] = array[i];
-		i++;
-	}
-	new_array[i++] = ft_strdup(str);
-	new_array[i] = NULL;
-	free(array);
-	return (new_array);
-}
-
 char	*str_range_cpy(char *str, size_t start, size_t end)
 {
 	char	*new_str;

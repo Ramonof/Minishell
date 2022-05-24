@@ -1,5 +1,28 @@
 #include "minishell.h"
 
+char	**array_add(char **array, char *str)
+{
+	char	**new_array;
+	size_t	i;
+	size_t	len;
+
+	len = array_len(array);
+	if (len == 0)
+		len++;
+	new_array = malloc((len + 1) * sizeof(char *));
+	i = 0;
+	while (array && array[i])
+	{
+		new_array[i] = array[i];
+		i++;
+	}
+	new_array[i++] = ft_strdup(str);
+	new_array[i] = NULL;
+	if (array)
+		free(array);
+	return (new_array);
+}
+
 char	**array_remove(char **array, size_t index)
 {
 	char	**new_array;

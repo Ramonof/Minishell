@@ -17,12 +17,12 @@ int	main()
 		{
 			add_history(line);
 			start_parser(&app);
+			free_cmds(&app);
     	}
 
 		if (line)
 		{
 			free(line);
-			free_cmds(&app);
 			line = NULL;
 		}
 		line = readline(">> ");

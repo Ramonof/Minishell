@@ -46,13 +46,18 @@ typedef	struct	s_data
 	char		*pwd;
 }				t_data;
 
+typedef struct	s_command
+{
+	char	**args;
+	int		input_desc;
+	int		output_desc;
+}	t_command;
+
 typedef struct s_app
 {
 	char		*line;
 	char		**tokens;
-	char		***cmds;
-	int			input_file;
-	int			output_file;
+	t_command	**cmds;
 	int			cmd_number;
 	int			pipe_number;
 	int			last_cmd_result;
@@ -84,7 +89,6 @@ void	start_parser(t_app *app);
 void	free_cmds(t_app *app);
 
 /* parser_utils.c */
-char	**array_add(char **array, char *str);
 size_t	array_len(char **array);
 char	*str_range_cpy(char *str, size_t start, size_t end);
 int		find_chr(const char *s, int c);
@@ -104,6 +108,10 @@ void	get_cmds(t_app *app);
 char	*delete_quotes(char *token);
 
 /* array_operations.c */
+char	**array_add(char **array, char *str);
 char    **array_remove(char **array, size_t index);
+
+/* handle_redirects.c */
+void	handle_redirects(t_app *app, size_t *i);
 
 #endif
