@@ -108,7 +108,8 @@ char	*get_line(char *str, char *buf)
 		return (NULL);
 	while (str[j] != '\n' && str[j] != '\0')
 	{
-		new_line[j] = str[j];
+		if (str[j] != '\r')
+			new_line[j] = str[j];
 		j++;
 	}
 	new_line[j] = '\0';
