@@ -44,7 +44,7 @@ typedef	struct	s_data
 	int			fd_in;
 	int			fd_out;
 	char		*pwd;
-}				t_data;
+}	t_data;
 
 typedef struct	s_command
 {
@@ -112,6 +112,6 @@ char	**array_add(char **array, char *str);
 char    **array_remove(char **array, size_t index);
 
 /* handle_redirects.c */
-void	handle_redirects(t_app *app, size_t *i);
+void	handle_redirects(t_app *app, size_t *i, size_t cmd_i);
 
 #endif

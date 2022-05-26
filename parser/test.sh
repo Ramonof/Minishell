@@ -5,4 +5,4 @@ array_operations.c \
 handle_redirects.c \
 ../gnl/get_next_line.c \
 ../gnl/get_next_line_utils.c \
-../libft/libft.a -I ../includes -lreadline
+../libft/libft.a -I ../includes -lreadline -Wall -Wextra -Werror
