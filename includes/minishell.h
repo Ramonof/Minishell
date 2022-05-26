@@ -48,19 +48,19 @@ typedef	struct	s_data
 
 typedef struct	s_command
 {
-	char	**args;
-	int		input_desc;
-	int		output_desc;
+	char	**args;			// массив аргументов
+	int		input_desc;		// входной дескриптор
+	int		output_desc;	// выходной дескриптор
 }	t_command;
 
 typedef struct s_app
 {
-	char		*line;
-	char		**tokens;
-	t_command	**cmds;
-	int			cmd_number;
-	int			pipe_number;
-	int			last_cmd_result;
+	char		*line;				// прочтённая строка
+	char		**tokens;			// массив отдельных токенов
+	t_command	**cmds;				// массив указателей на команды
+	int			cmd_number;			// число команд
+	int			pipe_number;		// число пайпов
+	int			last_cmd_result;	// код завершения последней команды
 }	t_app;
 
 /* executor.c */
