@@ -74,8 +74,8 @@ int	my_execute(t_app app, char **envp)
 {
 	t_pipex pipex;
 
-	pipex.infile = 0;
-	pipex.outfile = 1;
+	pipex.infile = app.cmds[0][0].input_desc;
+	pipex.outfile = app.cmds[app.cmd_number-1][0].output_desc;
 	pipex.pipe_nmbs = 2 * (app.cmd_number - 1);
 	pipex.cmd_nmbs = app.cmd_number;
 	pipex.pipe = (int *)malloc(sizeof(int) * pipex.pipe_nmbs);
@@ -102,7 +102,7 @@ int	my_execute(t_app app, char **envp)
 int	start_my_execute(t_app app, char **envp)
 {
 	if (!ft_strncmp(app.cmds[0][0].args[0], "cd", 3))
-		handle_cd(app.cmds[0][0], envp); //printf("here be cd\n");
+		handle_cd(app.cmds[0][0], envp);
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "test", 5))
 		printf("memory test\n");
 	else
