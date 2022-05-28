@@ -36,17 +36,28 @@ static char	*get_cmd(char **paths, char *cmd)
 	return (NULL);
 }
 
-// char	*find_path(char **envp)
+// static void	sub_dup2(int zero, int first)
 // {
-// 	while (ft_strncmp("PATH", *envp, 4))
-// 		envp++;
-// 	if (!*envp)
-// 		return (NULL);
-// 	return (*envp + 5);
+// 	if (dup2(zero, 0) < 0)
+// 	{
+// 		printf("exit\n");
+// 		error_exit("dup2");
+// 		exit(1);
+// 	}
+// 	if (dup2(first, 1) < 0)
+// 	{
+// 		printf("exit\n");
+// 		error_exit("dup2");
+// 		exit(1);
+// 	}
 // }
 
-static void	sub_dup2(int zero, int first)
+static void	sub_dup2(t_command cmd_st, int zero, int first)
 {
+	if (cmd_st.input_desc != 0)
+		zero = cmd_st.input_desc;
+	if (cmd_st.output_desc != 1)
+		first = cmd_st.output_desc;
 	if (dup2(zero, 0) < 0)
 	{
 		printf("exit\n");
@@ -63,7 +74,6 @@ static void	sub_dup2(int zero, int first)
 
 void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 {
-	//char *env_path;
 	char *cmd_full;
 
 	p.pid = fork();
@@ -71,18 +81,22 @@ void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 		write(2, "fork", ft_strlen("fork"));
 	if (!p.pid)
 	{
+		// if (p.idx == 0)
+		// 	sub_dup2(p.infile, p.pipe[1]);
+		// else if (p.idx == p.cmd_nmbs - 1)
+		// 	sub_dup2(p.pipe[2 * p.idx - 2], p.outfile);
+		// else
+		// 	sub_dup2(p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
 		if (p.idx == 0)
-			sub_dup2(p.infile, p.pipe[1]);
+			sub_dup2(cmd_st, p.infile, p.pipe[1]);
 		else if (p.idx == p.cmd_nmbs - 1)
-			sub_dup2(p.pipe[2 * p.idx - 2], p.outfile);
+			sub_dup2(cmd_st, p.pipe[2 * p.idx - 2], p.outfile);
 		else
-			sub_dup2(p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
+			sub_dup2(cmd_st, p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
 		close_pipes(&p);
-		//env_path = find_path(envp);
-		//cmd_paths = ft_split(env_path, ':');
 		cmd_full = get_cmd(p.cmd_paths, cmd_st.args[0]);
 		if (execve(cmd_full, cmd_st.args, envp) < 0)
-			printf("error: ");
+			printf("error: exec");
 		exit(1);
 	}
 }
