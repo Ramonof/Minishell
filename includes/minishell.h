@@ -66,11 +66,11 @@ typedef struct s_app
 /* executor.c */
 int		start_my_execute(t_app app, char **envp);
 int		my_execute(t_app app, char **envp);
-void	exec_cmd(t_pipex p, char **cmd_st, char **envp);
+void	exec_cmd(t_pipex p, t_command cmd_st, char **envp);
 void	close_pipes(t_pipex *pipex);
 
 /* cd */
-void	handle_cd(char **cmd_st, char **envp);
+void	handle_cd(t_command cmd_st, char **envp);
 
 /* tokens_check.c */
 void	tokens_check(char **tokens);

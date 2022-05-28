@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 
 	app.last_cmd_result = -1;
 
-	if (argc || argv)
+	if (argc || argv || envp)
 		printf("pass\n");
 
 	// readline working

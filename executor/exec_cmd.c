@@ -61,10 +61,10 @@ static void	sub_dup2(int zero, int first)
 	}
 }
 
-void	exec_cmd(t_pipex p, char **cmd_st, char **envp)
+void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 {
 	//char *env_path;
-	//char **cmd_paths;
+	char *cmd_full;
 
 	p.pid = fork();
 	if (p.pid < 0)
@@ -80,8 +80,8 @@ void	exec_cmd(t_pipex p, char **cmd_st, char **envp)
 		close_pipes(&p);
 		//env_path = find_path(envp);
 		//cmd_paths = ft_split(env_path, ':');
-		cmd_st[0] = get_cmd(p.cmd_paths, cmd_st[0]);
-		if (execve(cmd_st[0], cmd_st, envp) < 0)
+		cmd_full = get_cmd(p.cmd_paths, cmd_st.args[0]);
+		if (execve(cmd_full, cmd_st.args, envp) < 0)
 			printf("error: ");
 		exit(1);
 	}

@@ -90,7 +90,7 @@ int	my_execute(t_app app, char **envp)
 	pipex.idx = -1;
 	while (++(pipex.idx) < app.cmd_number)
 	{
-		exec_cmd(pipex, app.cmds[pipex.idx], envp);
+		exec_cmd(pipex, app.cmds[pipex.idx][0], envp);
 	}
 	close_pipes(&pipex);
 	while (pipex.idx--)
@@ -101,9 +101,9 @@ int	my_execute(t_app app, char **envp)
 
 int	start_my_execute(t_app app, char **envp)
 {
-	if (!ft_strncmp(app.cmds[0][0], "cd", 3))
-		handle_cd(app.cmds[0], envp); //printf("here be cd\n");
-	else if (!ft_strncmp(app.cmds[0][0], "test", 5))
+	if (!ft_strncmp(app.cmds[0][0].args[0], "cd", 3))
+		handle_cd(app.cmds[0][0], envp); //printf("here be cd\n");
+	else if (!ft_strncmp(app.cmds[0][0].args[0], "test", 5))
 		printf("memory test\n");
 	else
 		return (my_execute(app, envp));
