@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 static char		*str_remove_char(char *str, char to_delete);
-static size_t   get_size(char *str, char to_delete);
+static size_t	get_size(char *str, char to_delete);
 
 char	*delete_quotes(char *token)
 {
@@ -40,10 +40,10 @@ static char	*str_remove_char(char *str, char to_delete)
 	return (new_str);
 }
 
-static size_t   get_size(char *str, char to_delete)
+static size_t	get_size(char *str, char to_delete)
 {
-	size_t  i;
-	size_t  size;
+	size_t	i;
+	size_t	size;
 
 	size = 0;
 	i = 0;
