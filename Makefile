@@ -10,7 +10,8 @@ OBJ_DIR	= ./obj/
 
 SRC_FILES = minishell.c \
 			error.c \
-			init_env.c
+			init_env.c \
+			strcmp.c
 
 GNL_FILES = get_next_line.c \
 			get_next_line_utils.c
