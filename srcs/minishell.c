@@ -16,13 +16,20 @@
 int	main(int argc, char **argv, char **envp)
 {
 	//int	fd;
-	char *line;
-	t_app app;
+	char	*line;
+	char	**envpd;
+	t_app	app;
+	t_data	data;
+
 
 	app.last_cmd_result = -1;
 
 	if (argc || argv || envp)
 		printf("pass\n");
+	envpd = init_env(envp);
+	if (!envpd)
+		printf("No envp\n");
+	data.env = envpd;
 
 	// readline working
 	line = readline(">> ");
@@ -39,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 
 		start_parser(&app);
 
-		start_my_execute(app, envp);
+		start_my_execute(app, envpd, &data);
 		/**/
 		if (line)
 		{

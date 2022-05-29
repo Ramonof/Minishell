@@ -41,8 +41,6 @@ typedef struct s_cmd
 typedef	struct	s_data
 {
 	char		**env;
-	int			fd_in;
-	int			fd_out;
 	char		*pwd;
 }	t_data;
 
@@ -63,14 +61,38 @@ typedef struct s_app
 	int			last_cmd_result;	// код завершения последней команды
 }	t_app;
 
+/* init_env.c */
+char	**init_env(char **envp);
+
 /* executor.c */
-int		start_my_execute(t_app app, char **envp);
+int		start_my_execute(t_app app, char **envp, t_data *data);
 int		my_execute(t_app app, char **envp);
 void	exec_cmd(t_pipex p, t_command cmd_st, char **envp);
 void	close_pipes(t_pipex *pipex);
 
 /* cd */
 void	handle_cd(t_command cmd_st, char **envp);
+
+/* handle_unset.c */
+void	handle_unset(char **inputs, t_data *data);
+char	**unset_env(char **old_env, int index);
+
+/* export.c */
+void	handle_export(char **inputs, t_data *data);
+void	export_alone(t_data *data);
+char	**export_env(char **old_env, char *export);
+void	replace_var(char *new_var, t_data *data, int index);
+int		var_index(char *name, t_data *data);
+
+/* export_utils.c */
+int		check_export(char *str);
+int		print_export(char **env);
+
+/* env.c */
+void	free_env(char **env);
+int		envlen(char **env);
+char	**dup_env(char **env);
+void	handle_env(char **env);
 
 /* tokens_check.c */
 void	tokens_check(char **tokens);
@@ -80,6 +102,8 @@ void	errno_exit(char *err);
 void	msg_pipe(char *err);
 void	error_exit(char *err);
 int		ret_err(char *msg);
+char	**ret_err_char(char *msg);
+void	void_err(char *msg);
 
 /* strcmp.c */
 int	ft_strcmp(const char *str1, const char *str2);

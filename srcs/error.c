@@ -37,3 +37,14 @@ int	ret_err(char *msg)
 	write(2, msg, ft_strlen(msg));
 	return (1);
 }
+
+void	void_err(char *msg)
+{
+	write(2, msg, ft_strlen(msg));
+}
+
+char	**ret_err_char(char *msg)
+{
+	write(2, msg, ft_strlen(msg));
+	return (NULL);
+}

@@ -9,14 +9,19 @@ PARS_DIR := ./parser/
 OBJ_DIR	= ./obj/
 
 SRC_FILES = minishell.c \
-			error.c
+			error.c \
+			init_env.c
 
 GNL_FILES = get_next_line.c \
 			get_next_line_utils.c
 
 EXEC_FILES = 	executor.c \
 				exec_cmd.c \
-				cd.c
+				cd.c \
+				export.c \
+				export_utils.c \
+				handle_unset.c \
+				env.c
 
 PARS_FILES =	parser.c \
 				parser_utils.c \
