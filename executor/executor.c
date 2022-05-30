@@ -119,8 +119,9 @@ int	start_my_execute(t_app app, char **envp, t_data *data)
 		printf("memory test\n");
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "unset", 6))
 		handle_unset(app.cmds[0][0].args, data);
+	else if (!ft_strncmp(app.cmds[0][0].args[0], "export", 7))
+		handle_export(app.cmds[0][0].args, data);
 	else
 		return (my_execute(app, envp));
-	// print_envp(data->env);
 	return (1);
 }
