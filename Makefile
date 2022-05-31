@@ -22,7 +22,10 @@ EXEC_FILES = 	executor.c \
 				export.c \
 				export_utils.c \
 				handle_unset.c \
-				env.c
+				env.c \
+				exit.c \
+				echo.c \
+				pwd.c
 
 PARS_FILES =	parser.c \
 				parser_utils.c \

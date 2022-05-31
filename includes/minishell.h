@@ -94,6 +94,15 @@ int		envlen(char **env);
 char	**dup_env(char **env);
 void	handle_env(char **env);
 
+/* pwd.c */
+void	handle_pwd(void);
+
+/* echo.c */
+void	handle_echo(char **args);
+
+/* exit.c */
+void	handle_exit(char **inputs, t_data *data);
+
 /* tokens_check.c */
 void	tokens_check(char **tokens);
 

@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/22 11:29:41 by mrolande          #+#    #+#             */
-/*   Updated: 2022/05/22 11:29:41 by mrolande         ###   ########.fr       */
+/*   Created: 2022/05/31 12:12:02 by mrolande          #+#    #+#             */
+/*   Updated: 2022/05/31 12:12:09 by mrolande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// char	*find_home(char **envp)
-// {
-// 	while (ft_strncmp("HOME", *envp, 4))
-// 		envp++;
-// 	if (!*envp)
-// 		return (NULL);
-// 	return (*envp + 5);
-// }
-
-// void	handle_pwd(t_data *data)
-// {
-// 	ft_putstr(data->pwd);
-// 	ft_putstr("\n");
-// 	// g_status = 0;
-// }
-
-void	handle_pwd(void)
+void	handle_echo(char **args)
 {
-	char	*cwd;
+	int i;
+	int n_flag;
 
-	cwd = getcwd(NULL, 0);
-	ft_putstr_fd(cwd, 1);
-	ft_putstr_fd("\n", 1);
+	i = 1;
+	n_flag = 0;
 	// g_status = 0;
+	while (args[i] && !ft_strcmp(args[i], "-n") && i++)
+		n_flag = 1;
+	while (args[i])
+	{
+		write(1, args[i], ft_strlen(args[i]));
+		if (args[i + 1])
+			write(1, " ", 1);
+		i++;
+	}
+	if (!n_flag)
+		write(1, "\n", 1);
 }
-

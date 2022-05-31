@@ -121,6 +121,14 @@ int	start_my_execute(t_app app, char **envp, t_data *data)
 		handle_unset(app.cmds[0][0].args, data);
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "export", 7))
 		handle_export(app.cmds[0][0].args, data);
+	else if (!ft_strncmp(app.cmds[0][0].args[0], "env", 4))
+		handle_env(envp);
+	else if (!ft_strncmp(app.cmds[0][0].args[0], "exit", 5))
+		handle_exit(app.cmds[0][0].args, data);
+	else if (!ft_strncmp(app.cmds[0][0].args[0], "echo", 5))
+		handle_echo(app.cmds[0][0].args);
+	else if (!ft_strncmp(app.cmds[0][0].args[0], "pwd", 4))
+		handle_pwd();
 	else
 		return (my_execute(app, envp));
 	return (1);
