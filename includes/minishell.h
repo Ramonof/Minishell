@@ -120,6 +120,7 @@ int	ft_strcmp(const char *str1, const char *str2);
 /* parser.c */
 void	start_parser(t_app *app);
 void	free_cmds(t_app *app);
+void	free_tokens(t_app *app);
 
 /* parser_utils.c */
 size_t	array_len(char **array);
@@ -145,6 +146,6 @@ char	**array_add(char **array, char *str);
 char    **array_remove(char **array, size_t index);
 
 /* handle_redirects.c */
-void	handle_redirects(t_app *app, size_t *i, size_t cmd_i);
+void	handle_redirects(t_app *app, size_t i, size_t cmd_i);
 
 #endif

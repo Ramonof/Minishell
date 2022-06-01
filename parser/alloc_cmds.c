@@ -61,7 +61,7 @@ void	get_cmds(t_app *app)
 		if (app->tokens[i][0] == '|')
 			cmd_i++;
 		else if (app->tokens[i][0] == '<' || app->tokens[i][0] == '>')
-			handle_redirects(app, &i, cmd_i);
+			handle_redirects(app, i++, cmd_i);
 		else
 			app->cmds[cmd_i]->args = array_add(app->cmds[cmd_i]->args,
 					app->tokens[i]);
