@@ -34,7 +34,8 @@ PARS_FILES =	parser.c \
 				delete_quotes.c \
 				alloc_cmds.c \
 				array_operations.c \
-				handle_redirects.c
+				handle_redirects.c \
+				syntax_checker.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJ_GNL_FILES = $(GNL_FILES:.c=.o)

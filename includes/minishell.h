@@ -149,4 +149,7 @@ char    **array_remove(char **array, size_t index);
 /* handle_redirects.c */
 void	handle_redirects(t_app *app, size_t i, size_t cmd_i);
 
+/* syntax_checker.c */
+void	start_syntax_checker(t_app *app);
+
 #endif
