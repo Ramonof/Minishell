@@ -59,6 +59,7 @@ typedef struct s_app
 	int			cmd_number;			// число команд
 	int			pipe_number;		// число пайпов
 	int			last_cmd_result;	// код завершения последней команды
+	t_data		*data;
 }	t_app;
 
 /* init_env.c */

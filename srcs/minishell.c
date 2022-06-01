@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!envpd)
 		printf("No envp\n");
 	data.env = envpd;
-
+	app.data = &data;
 	// readline working
 	line = readline(">> ");
 	while (line)

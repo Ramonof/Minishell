@@ -1,7 +1,9 @@
 #include "minishell.h"
 
-static char	*expand_token(char *token);
-static char	*expand_variable(char *token, size_t *i);
+static char		*expand_token(char **envp, char *token);
+static char		*expand_variable(char **envp, char *token, size_t *i);
+static char		*get_var(char **envp, char *varname);
+static size_t	find_var(char *var, char *varname);
 
 void	expand_tokens(t_app *app)
 {
@@ -10,12 +12,12 @@ void	expand_tokens(t_app *app)
 	i = 0;
 	while (app->tokens[i])
 	{
-		app->tokens[i] = expand_token(app->tokens[i]);
+		app->tokens[i] = expand_token(app->data->env, app->tokens[i]);
 		i++;
 	}
 }
 
-static char	*expand_token(char *token)
+static char	*expand_token(char **envp, char *token)
 {
 	size_t	i;
 
@@ -28,7 +30,7 @@ static char	*expand_token(char *token)
 		if (token[i] == '$')
 		{
 			i++;
-			token = expand_variable(token, &i);
+			token = expand_variable(envp, token, &i);
 		}
 		i++;
 	}
@@ -36,7 +38,7 @@ static char	*expand_token(char *token)
 	return (token);
 }
 
-static char	*expand_variable(char *token, size_t *i)
+static char	*expand_variable(char **envp, char *token, size_t *i)
 {
 	size_t	j;
 	char	*temp;
@@ -48,10 +50,41 @@ static char	*expand_variable(char *token, size_t *i)
 		&& token[*i] != ' ' && token[*i] != '$')
 		(*i)++;
 	temp = str_range_cpy(token, j, *i);
-	env = getenv(temp);
+	env = get_var(envp, temp);
 	new_token = str_insert(token, env, j - 1, *i - 1);
 	*i = j;
 	free(temp);
 	free(token);
 	return (new_token);
+}
+
+static char	*get_var(char **envp, char *varname)
+{
+	int		i;
+	char	*var;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (find_var(envp[i], varname))
+			break ;
+		i++;
+	}
+	var = envp[i];
+	i = find_chr(var, '=') + 1;
+	return (var + i);
+}
+
+static size_t	find_var(char *var, char *varname)
+{
+	size_t	i;
+
+	i = 0;
+	while (varname[i] && var[i] != '=')
+	{
+		if (var[i] != varname[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }
