@@ -58,7 +58,6 @@ typedef struct s_app
 	t_command	**cmds;				// массив указателей на команды
 	int			cmd_number;			// число команд
 	int			pipe_number;		// число пайпов
-	int			last_cmd_result;	// код завершения последней команды
 	t_data		*data;
 }	t_app;
 
@@ -155,5 +154,11 @@ void	handle_redirects(t_app *app, size_t i, size_t cmd_i);
 
 /* syntax_checker.c */
 void	start_syntax_checker(t_app *app);
+
+/* check_line.c */
+int	check_line(char *line);
+
+/* check_tokens.c */
+void	check_tokens(t_app *app);
 
 #endif
