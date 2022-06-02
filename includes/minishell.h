@@ -62,6 +62,8 @@ typedef struct s_app
 	t_data		*data;
 }	t_app;
 
+int		g_status;
+
 /* init_env.c */
 char	**init_env(char **envp);
 
@@ -102,6 +104,7 @@ void	handle_pwd(void);
 void	handle_echo(char **args);
 
 /* exit.c */
+void	error_sentence(char *str, int status);
 void	handle_exit(char **inputs, t_data *data);
 
 /* tokens_check.c */

@@ -6,7 +6,7 @@
 /*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 11:56:18 by mrolande          #+#    #+#             */
-/*   Updated: 2022/05/29 12:26:57 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/02 12:05:23 by mrolande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,11 @@ void	handle_export(char **inputs, t_data *data)
 					exit(EXIT_FAILURE);
 			}
 			else
-				return (void_err("export: bad identifier\n"));
+				return (error_sentence("export: bad identifier\n", 1));
 			i++;
 		}
 	}
 	else
 		export_alone(data);
-	//g_status = 0;
+	g_status = 0;
 }

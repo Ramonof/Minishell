@@ -6,7 +6,7 @@
 /*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 12:12:02 by mrolande          #+#    #+#             */
-/*   Updated: 2022/05/31 12:12:09 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/02 12:20:14 by mrolande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	handle_echo(char **args)
 
 	i = 1;
 	n_flag = 0;
-	// g_status = 0;
+	g_status = 0;
 	while (args[i] && !ft_strcmp(args[i], "-n") && i++)
 		n_flag = 1;
 	while (args[i])

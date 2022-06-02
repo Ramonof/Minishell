@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	t_app	app;
 	t_data	data;
 
-
+	g_status = 0;
 	app.last_cmd_result = -1;
 
 	if (argc || argv || envp)

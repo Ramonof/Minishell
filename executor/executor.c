@@ -82,9 +82,9 @@ void	my_execute(t_app app, char **envp)
 	pipex.env_path = find_path(envp);
 	pipex.cmd_paths = ft_split(pipex.env_path, ':');
 	if (!pipex.cmd_paths || !pipex.pipe)
-		error_exit("malloc");
+		return (error_sentence("malloc", 1));
 	if (!pipex.pipe)
-		error_exit("Pipe");
+		return (error_sentence("Pipe", 1));
 	creat_pipes(&pipex);
 
 	pipex.idx = -1;

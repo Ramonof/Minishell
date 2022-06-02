@@ -6,7 +6,7 @@
 /*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 12:22:31 by mrolande          #+#    #+#             */
-/*   Updated: 2022/05/29 12:28:13 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/02 12:20:10 by mrolande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void	handle_env(char **env)
 		}
 		i++;
 	}
-	//g_status = 0;
+	g_status = 0;
 }
