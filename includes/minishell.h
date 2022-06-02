@@ -74,7 +74,8 @@ void	exec_cmd(t_pipex p, t_command cmd_st, char **envp);
 void	close_pipes(t_pipex *pipex);
 
 /* cd */
-void	handle_cd(t_command cmd_st, char **envp);
+void	handle_cd(char **args, t_data *data);
+int		change_pwd(t_data *data, char *input);
 
 /* handle_unset.c */
 void	handle_unset(char **inputs, t_data *data);

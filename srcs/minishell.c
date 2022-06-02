@@ -31,6 +31,7 @@ int	main(int argc, char **argv, char **envp)
 		printf("No envp\n");
 	data.env = envpd;
 	app.data = &data;
+	data.pwd = getcwd(NULL, 0);
 	// readline working
 	line = readline(">> ");
 	while (line)

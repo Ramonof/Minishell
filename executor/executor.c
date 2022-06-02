@@ -98,22 +98,10 @@ void	my_execute(t_app app, char **envp)
 	parent_free(&pipex, 0);
 }
 
-// static void	print_envp(char **envpd)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (envpd[i])
-// 	{
-// 		printf("%s\n", envpd[i]);
-// 		i++;
-// 	}
-// }
-
 void	start_my_execute(t_app app, char **envp, t_data *data)
 {
 	if (!ft_strncmp(app.cmds[0][0].args[0], "cd", 3))
-		handle_cd(app.cmds[0][0], envp);
+		handle_cd(app.cmds[0][0].args, data);
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "test", 5))
 		printf("memory test\n");
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "unset", 6))

@@ -19,6 +19,7 @@ GNL_FILES = get_next_line.c \
 EXEC_FILES = 	executor.c \
 				exec_cmd.c \
 				cd.c \
+				cd_utils.c \
 				export.c \
 				export_utils.c \
 				handle_unset.c \
