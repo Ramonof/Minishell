@@ -100,6 +100,7 @@ void	my_execute(t_app app, char **envp)
 
 void	start_my_execute(t_app app, char **envp, t_data *data)
 {
+	write(2, "exec started\n", 13);
 	if (!ft_strncmp(app.cmds[0][0].args[0], "cd", 3))
 		handle_cd(app.cmds[0][0].args, data);
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "test", 5))

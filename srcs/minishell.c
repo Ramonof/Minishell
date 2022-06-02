@@ -43,8 +43,6 @@ int	main(int argc, char **argv, char **envp)
 		/**/
 		app.line = line;
 
-		printf("Line: %s\n", app.line);
-
 		start_parser(&app);
 
 		start_my_execute(app, envpd, &data);
