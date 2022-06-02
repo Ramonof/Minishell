@@ -15,14 +15,11 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	//int	fd;
-	char	*line;
 	char	**envpd;
 	t_app	app;
 	t_data	data;
 
 	g_status = 0;
-	app.last_cmd_result = -1;
 
 	if (argc || argv || envp)
 		printf("pass\n");
@@ -32,30 +29,29 @@ int	main(int argc, char **argv, char **envp)
 	data.env = envpd;
 	app.data = &data;
 	data.pwd = getcwd(NULL, 0);
-	// readline working
-	line = readline(">> ");
-	while (line)
+
+	app.line = readline(">> ");
+	while (app.line)
 	{
-		if (strlen(line) > 0)
-		{
-			add_history(line);
-    	}
-		/**/
-		app.line = line;
-
 		printf("Line: %s\n", app.line);
-
-		start_parser(&app);
-
-		start_my_execute(app, envpd, &data);
-		envpd = data.env;
-		/**/
-		if (line)
+		
+		if (strlen(app.line) > 0)
 		{
-			free(line);
-			line = NULL;
+			if (check_line(app.line))
+			{
+				add_history(app.line);
+				start_parser(&app);
+				start_my_execute(app, envpd, &data);
+			}
+    	}
+
+		envpd = data.env;
+		if (app.line)
+		{
+			free(app.line);
+			app.line = NULL;
 		}
-		line = readline(">> ");
+		app.line = readline(">> ");
   	}
 	// ************* (183)
 	return (0);
