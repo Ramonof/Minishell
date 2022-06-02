@@ -96,7 +96,7 @@ void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 		close_pipes(&p);
 		cmd_full = get_cmd(p.cmd_paths, cmd_st.args[0]);
 		if (execve(cmd_full, cmd_st.args, envp) < 0)
-			printf("error: exec");
+			ft_putstr_fd("error: exec", 2);
 		exit(1);
 	}
 }

@@ -70,7 +70,7 @@ void	parent_free(t_pipex *pipex, int mode)
 	}
 }
 
-int	my_execute(t_app app, char **envp)
+void	my_execute(t_app app, char **envp)
 {
 	t_pipex pipex;
 
@@ -82,9 +82,9 @@ int	my_execute(t_app app, char **envp)
 	pipex.env_path = find_path(envp);
 	pipex.cmd_paths = ft_split(pipex.env_path, ':');
 	if (!pipex.cmd_paths || !pipex.pipe)
-		return (ret_err("malc")); //pipe_free(&pipex);
+		error_exit("malloc");
 	if (!pipex.pipe)
-		return (ret_err("Pipe"));
+		error_exit("Pipe");
 	creat_pipes(&pipex);
 
 	pipex.idx = -1;
@@ -96,7 +96,7 @@ int	my_execute(t_app app, char **envp)
 	while (pipex.idx--)
 		waitpid(-1, NULL, 0);
 	parent_free(&pipex, 0);
-	return (0);
+	exit(0);
 }
 
 // static void	print_envp(char **envpd)
@@ -111,7 +111,7 @@ int	my_execute(t_app app, char **envp)
 // 	}
 // }
 
-int	start_my_execute(t_app app, char **envp, t_data *data)
+void	start_my_execute(t_app app, char **envp, t_data *data)
 {
 	if (!ft_strncmp(app.cmds[0][0].args[0], "cd", 3))
 		handle_cd(app.cmds[0][0], envp);
@@ -130,6 +130,6 @@ int	start_my_execute(t_app app, char **envp, t_data *data)
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "pwd", 4))
 		handle_pwd();
 	else
-		return (my_execute(app, envp));
-	return (1);
+		my_execute(app, envp);
+	exit(0);
 }
