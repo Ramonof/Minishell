@@ -46,17 +46,7 @@ int	main(int argc, char **argv, char **envp)
 
 		start_parser(&app);
 
-		pid_t	pid;
-
-		pid = fork();
-		if (pid < 0)
-		{
-			perror("fork");
-            exit(EXIT_FAILURE);
-		}
-		if (!pid)
-			start_my_execute(app, envpd, &data);
-		waitpid(pid, NULL, 0);
+		start_my_execute(app, envpd, &data);
 		envpd = data.env;
 		/**/
 		if (line)

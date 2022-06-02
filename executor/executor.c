@@ -96,7 +96,6 @@ void	my_execute(t_app app, char **envp)
 	while (pipex.idx--)
 		waitpid(-1, NULL, 0);
 	parent_free(&pipex, 0);
-	exit(0);
 }
 
 // static void	print_envp(char **envpd)
@@ -131,5 +130,4 @@ void	start_my_execute(t_app app, char **envp, t_data *data)
 		handle_pwd();
 	else
 		my_execute(app, envp);
-	exit(0);
 }
