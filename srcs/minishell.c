@@ -44,10 +44,6 @@ int	main(int argc, char **argv, char **envp)
 				start_my_execute(app, envpd, &data);
 			}
     	}
-		/**/
-		app.line = line;
-
-		start_parser(&app);
 
 		envpd = data.env;
 		if (app.line)
