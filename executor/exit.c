@@ -6,7 +6,7 @@
 /*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 11:59:15 by mrolande          #+#    #+#             */
-/*   Updated: 2022/06/02 12:06:48 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:17:29 by mrolande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	handle_exit(char **inputs, t_data *data)
 			error_sentence("\t\tminishell: numeric argument is required\n", 2);
 	}
 	// free_env(inputs);
-	// free(data->pwd);
+	free(data->pwd);
 	free_env(data->env);
 	exit(g_status);
 }
