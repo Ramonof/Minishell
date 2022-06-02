@@ -5,6 +5,7 @@ array_operations.c \
 handle_redirects.c \
 syntax_checker.c \
 check_line.c \
+check_tokens.c \
 ../srcs/error.c \
 ../srcs/strcmp.c \
 ../srcs/init_env.c \

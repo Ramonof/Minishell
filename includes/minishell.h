@@ -61,7 +61,7 @@ typedef struct s_app
 	t_data		*data;
 }	t_app;
 
-//int		g_status;
+int		g_status;
 
 /* init_env.c */
 char	**init_env(char **envp);
@@ -157,5 +157,8 @@ void	start_syntax_checker(t_app *app);
 
 /* check_line.c */
 int	check_line(char *line);
+
+/* check_tokens.c */
+void	check_tokens(t_app *app);
 
 #endif

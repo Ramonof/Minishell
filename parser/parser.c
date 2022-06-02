@@ -5,7 +5,10 @@ void	start_parser(t_app *app)
 	start_syntax_checker(app);
 	app->tokens = NULL;
 	get_tokens(app);
+	check_tokens(app);
 	expand_tokens(app);
+	for (int i = 0; app->tokens[i]; i++)
+		printf("%s\n", app->tokens[i]);
 	alloc_cmds(app);
 	get_cmds(app);
 	free_tokens(app);

@@ -51,7 +51,10 @@ static char	*expand_variable(char **envp, char *token, size_t *i)
 		(*i)++;
 	temp = str_range_cpy(token, j, *i);
 	env = get_var(envp, temp);
-	new_token = str_insert(token, env, j - 1, *i - 1);
+	if (ft_strlen(temp) == 0)
+		new_token = str_insert(token, "$", j - 1, *i - 1);
+	else
+		new_token = str_insert(token, env, j - 1, *i - 1);
 	*i = j;
 	free(temp);
 	free(token);
