@@ -72,21 +72,42 @@ static void	sub_dup2(t_command cmd_st, int zero, int first)
 	}
 }
 
-void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
-{
-	char *cmd_full;
+// void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
+// {
+// 	char *cmd_full;
 
+// 	p.pid = fork();
+// 	if (p.pid < 0)
+// 		write(2, "fork", ft_strlen("fork"));
+// 	if (!p.pid)
+// 	{
+// 		// if (p.idx == 0)
+// 		// 	sub_dup2(p.infile, p.pipe[1]);
+// 		// else if (p.idx == p.cmd_nmbs - 1)
+// 		// 	sub_dup2(p.pipe[2 * p.idx - 2], p.outfile);
+// 		// else
+// 		// 	sub_dup2(p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
+// 		if (p.idx == 0)
+// 			sub_dup2(cmd_st, p.infile, p.pipe[1]);
+// 		else if (p.idx == p.cmd_nmbs - 1)
+// 			sub_dup2(cmd_st, p.pipe[2 * p.idx - 2], p.outfile);
+// 		else
+// 			sub_dup2(cmd_st, p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
+// 		close_pipes(&p);
+// 		cmd_full = get_cmd(p.cmd_paths, cmd_st.args[0]);
+// 		if (execve(cmd_full, cmd_st.args, envp) < 0)
+// 			ft_putstr_fd("error: exec\n", 2);
+// 		exit(1);
+// 	}
+// }
+
+void	handle_exec(t_pipex p, t_command cmd_st, char **envp)
+{
 	p.pid = fork();
 	if (p.pid < 0)
 		write(2, "fork", ft_strlen("fork"));
 	if (!p.pid)
 	{
-		// if (p.idx == 0)
-		// 	sub_dup2(p.infile, p.pipe[1]);
-		// else if (p.idx == p.cmd_nmbs - 1)
-		// 	sub_dup2(p.pipe[2 * p.idx - 2], p.outfile);
-		// else
-		// 	sub_dup2(p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
 		if (p.idx == 0)
 			sub_dup2(cmd_st, p.infile, p.pipe[1]);
 		else if (p.idx == p.cmd_nmbs - 1)
@@ -94,9 +115,30 @@ void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 		else
 			sub_dup2(cmd_st, p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
 		close_pipes(&p);
-		cmd_full = get_cmd(p.cmd_paths, cmd_st.args[0]);
-		if (execve(cmd_full, cmd_st.args, envp) < 0)
-			ft_putstr_fd("error: exec", 2);
-		exit(1);
+		if (!ft_strncmp(cmd_st.args[0], "env", 4))
+			handle_env(envp);
+		else if (!ft_strncmp(cmd_st.args[0], "echo", 5))
+			handle_echo(cmd_st.args);
+		else if (!ft_strncmp(cmd_st.args[0], "pwd", 4))
+			handle_pwd();
+		else
+			exec_cmd(p, cmd_st, envp);
+		exit(g_status);
 	}
+}
+
+void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
+{
+	char *cmd_full;
+
+	// if (p.idx == 0)
+	// 	sub_dup2(p.infile, p.pipe[1]);
+	// else if (p.idx == p.cmd_nmbs - 1)
+	// 	sub_dup2(p.pipe[2 * p.idx - 2], p.outfile);
+	// else
+	// 	sub_dup2(p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
+	cmd_full = get_cmd(p.cmd_paths, cmd_st.args[0]);
+	if (execve(cmd_full, cmd_st.args, envp) < 0)
+		ft_putstr_fd("error: exec\n", 2);
+	exit(1);
 }

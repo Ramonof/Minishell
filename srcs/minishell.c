@@ -13,6 +13,15 @@
 #include "get_next_line.h"
 #include "minishell.h"
 
+char	*find_pwd(char **envp)
+{
+	while (ft_strncmp("PWD=", *envp, 4))
+		envp++;
+	if (!*envp)
+		return (NULL);
+	return (*envp + 5);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	**envpd;
@@ -28,7 +37,8 @@ int	main(int argc, char **argv, char **envp)
 		printf("No envp\n");
 	data.env = envpd;
 	app.data = &data;
-	data.pwd = getcwd(NULL, 0);
+	// data.pwd = getcwd(NULL, 0);
+	data.pwd = ft_strdup(find_pwd(envp));
 
 	app.line = readline(">> ");
 	while (app.line)

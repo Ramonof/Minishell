@@ -70,6 +70,7 @@ char	**init_env(char **envp);
 void	start_my_execute(t_app app, char **envp, t_data *data);
 void	my_execute(t_app app, char **envp);
 void	exec_cmd(t_pipex p, t_command cmd_st, char **envp);
+void	handle_exec(t_pipex p, t_command cmd_st, char **envp);
 void	close_pipes(t_pipex *pipex);
 
 /* cd */
