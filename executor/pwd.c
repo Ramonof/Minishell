@@ -36,5 +36,6 @@ void	handle_pwd(void)
 	ft_putstr_fd(cwd, 1);
 	ft_putstr_fd("\n", 1);
 	g_status = 0;
+	free(cwd);
 }
 

@@ -57,11 +57,10 @@ typedef struct s_app
 	char		**tokens;			// массив отдельных токенов
 	t_command	**cmds;				// массив указателей на команды
 	int			cmd_number;			// число команд
-	int			pipe_number;		// число пайпов
 	t_data		*data;
 }	t_app;
 
-int		g_status;
+extern int		g_status;
 
 /* init_env.c */
 char	**init_env(char **envp);

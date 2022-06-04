@@ -22,7 +22,6 @@ void	alloc_cmds(t_app *app)
 		i++;
 	}
 	app->cmd_number = size;
-	app->pipe_number = size - 1;
 	app->cmds = malloc((size + 1) * sizeof(t_command *));
 	alloc_memory(app);
 }

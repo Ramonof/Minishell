@@ -13,6 +13,8 @@
 #include "get_next_line.h"
 #include "minishell.h"
 
+int	g_status = 0;
+
 char	*find_pwd(char **envp)
 {
 	while (ft_strncmp("PWD=", *envp, 4))
@@ -28,8 +30,6 @@ int	main(int argc, char **argv, char **envp)
 	t_app	app;
 	t_data	data;
 
-	g_status = 0;
-
 	if (argc || argv || envp)
 		printf("pass\n");
 	envpd = init_env(envp);
@@ -39,12 +39,10 @@ int	main(int argc, char **argv, char **envp)
 	app.data = &data;
 	// data.pwd = getcwd(NULL, 0);
 	data.pwd = ft_strdup(find_pwd(envp));
-
 	app.line = readline(">> ");
 	while (app.line)
 	{
 		printf("Line: %s\n", app.line);
-		
 		if (strlen(app.line) > 0)
 		{
 			if (check_line(app.line))
@@ -52,9 +50,9 @@ int	main(int argc, char **argv, char **envp)
 				add_history(app.line);
 				start_parser(&app);
 				start_my_execute(app, envpd, &data);
+				free_cmds(&app);
 			}
-    	}
-
+		}
 		envpd = data.env;
 		if (app.line)
 		{
@@ -62,7 +60,7 @@ int	main(int argc, char **argv, char **envp)
 			app.line = NULL;
 		}
 		app.line = readline(">> ");
-  	}
+	}
 	// ************* (183)
 	return (0);
 }

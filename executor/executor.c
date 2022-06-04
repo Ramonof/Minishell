@@ -128,7 +128,7 @@ void	my_execute(t_app app, char **envp)
 
 void	start_my_execute(t_app app, char **envp, t_data *data)
 {
-	if (app.pipe_number)
+	if (app.cmd_number - 1)
 		my_execute(app, envp);
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "cd", 3))
 		handle_cd(app.cmds[0][0].args, data);
