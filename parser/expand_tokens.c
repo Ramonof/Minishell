@@ -56,6 +56,8 @@ static char	*expand_variable(char **envp, char *token, size_t *i)
 	else
 		new_token = str_insert(token, env, j - 1, *i - 1);
 	*i = j;
+	if (ft_strcmp(temp, "?") == 0)
+		free(env);
 	free(temp);
 	free(token);
 	return (new_token);
@@ -66,6 +68,11 @@ static char	*get_var(char **envp, char *varname)
 	int		i;
 	char	*var;
 
+	if (ft_strcmp(varname, "?") == 0)
+	{
+		var = ft_itoa(g_status);
+		return (var);
+	}
 	i = 0;
 	while (envp[i])
 	{
@@ -74,6 +81,8 @@ static char	*get_var(char **envp, char *varname)
 		i++;
 	}
 	var = envp[i];
+	if (!var)
+		return (NULL);
 	i = find_chr(var, '=') + 1;
 	return (var + i);
 }

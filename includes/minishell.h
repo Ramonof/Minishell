@@ -161,4 +161,8 @@ int	check_line(char *line);
 /* check_tokens.c */
 void	check_tokens(t_app *app);
 
+/* signals.c */
+void	sig_quit(int code);
+void	sig_int(int code);
+
 #endif

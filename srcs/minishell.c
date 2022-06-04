@@ -35,6 +35,8 @@ int	main(int argc, char **argv, char **envp)
 	envpd = init_env(envp);
 	if (!envpd)
 		printf("No envp\n");
+	signal(SIGQUIT, &sig_quit);
+	signal(SIGINT, &sig_int);
 	data.env = envpd;
 	app.data = &data;
 	// data.pwd = getcwd(NULL, 0);
@@ -61,6 +63,10 @@ int	main(int argc, char **argv, char **envp)
 		}
 		app.line = readline(">> ");
 	}
+	free(data.pwd);
+	for (int i = 0; data.env[i]; i++)
+		free(data.env[i]);
+	free(data.env);
 	// ************* (183)
 	return (0);
 }
