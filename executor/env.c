@@ -6,7 +6,7 @@
 /*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 12:22:31 by mrolande          #+#    #+#             */
-/*   Updated: 2022/06/02 12:20:10 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/06 15:20:54 by mrolande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ void	handle_env(char **env)
 	char	*str;
 
 	i = 0;
+	if (!env)
+	{
+		g_status = 0;
+		return ;
+	}
 	while (env[i])
 	{
 		str = ft_strstr(env[i], "=");

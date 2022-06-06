@@ -15,12 +15,16 @@
 
 # include <fcntl.h>
 # include <stdio.h>
+# include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
 
 # include <sys/types.h>
 # include <sys/wait.h>
+
+# define MALLOC_ERROR "Error : Malloc returned NULL\n"
+# define MALLOC_ERROR_CODE 1
 
 typedef struct s_cmd
 {

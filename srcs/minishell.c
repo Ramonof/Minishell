@@ -17,11 +17,13 @@ int	g_status = 0;
 
 char	*find_pwd(char **envp)
 {
+	if (!envp)
+		return (NULL);
 	while (ft_strncmp("PWD=", *envp, 4))
 		envp++;
 	if (!*envp)
 		return (NULL);
-	return (*envp + 5);
+	return (*envp + 4);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -30,17 +32,18 @@ int	main(int argc, char **argv, char **envp)
 	t_app	app;
 	t_data	data;
 
-	if (argc || argv || envp)
-		printf("pass\n");
-	envpd = init_env(envp);
+	if ((argc || argv ) && envp)
+		envpd = init_env(envp);
 	if (!envpd)
-		printf("No envp\n");
-	signal(SIGQUIT, &sig_quit);
-	signal(SIGINT, &sig_int);
+		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
+	// signal(SIGQUIT, &sig_quit);
+	// signal(SIGINT, &sig_int);
 	data.env = envpd;
 	app.data = &data;
 	// data.pwd = getcwd(NULL, 0);
 	data.pwd = ft_strdup(find_pwd(envp));
+	if (!data.pwd)
+		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
 	app.line = readline(">> ");
 	while (app.line)
 	{
