@@ -27,6 +27,8 @@
 # define MALLOC_ERROR_CODE 1
 # define PIPE_ERROR "Error : Pipe\n"
 
+# define HEREDOC ".heredoc_tmp"
+
 typedef struct s_cmd
 {
 	int		cmd_nmbs;       // Количество комманд

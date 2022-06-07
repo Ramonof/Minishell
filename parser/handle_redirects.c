@@ -40,7 +40,7 @@ static int	get_heredoc(t_app *app, size_t i, size_t cmd_i)
 
 	if (app->cmds[cmd_i]->input_desc > 2)
 		close(app->cmds[cmd_i]->input_desc);
-	fd = open(".heredoc_tmp", O_CREAT | O_WRONLY | O_TRUNC, 0000644);
+	fd = open(HEREDOC, O_CREAT | O_WRONLY | O_TRUNC, 0000644);
 	while (1)
 	{
 		write(1, "heredoc> ", 9);
@@ -55,7 +55,7 @@ static int	get_heredoc(t_app *app, size_t i, size_t cmd_i)
 	get_next_line(0, &buf, 1);
 	free(buf);
 	close(fd);
-	fd = open(".heredoc_tmp", O_RDONLY);
+	fd = open(HEREDOC, O_RDONLY);
 	return (fd);
 }
 
