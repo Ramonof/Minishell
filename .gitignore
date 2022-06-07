@@ -4,3 +4,4 @@
 **/*.o
 libft/libft.a
 *.out
+.heredoc_tmp

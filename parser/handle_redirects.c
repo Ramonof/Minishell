@@ -52,7 +52,7 @@ static int	get_heredoc(t_app *app, size_t i, size_t cmd_i)
 		write(fd, "\n", 1);
 		free(buf);
 	}
-	get_next_line(0, &buf, 1);
+	get_next_line(0, NULL, 0);
 	free(buf);
 	close(fd);
 	fd = open(HEREDOC, O_RDONLY);

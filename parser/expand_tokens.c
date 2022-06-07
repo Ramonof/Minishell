@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 static char		*expand_token(char **envp, char *token);
-static char		*expand_variable(char **envp, char *token, size_t *i);
+static char		*expand_variable(char **envp, char *token, size_t i);
 static char		*get_var(char **envp, char *varname);
 static size_t	find_var(char *var, char *varname);
 
@@ -30,7 +30,8 @@ static char	*expand_token(char **envp, char *token)
 		if (token[i] == '$')
 		{
 			i++;
-			token = expand_variable(envp, token, &i);
+			token = expand_variable(envp, token, i);
+			i -= 2;
 		}
 		i++;
 	}
@@ -38,24 +39,24 @@ static char	*expand_token(char **envp, char *token)
 	return (token);
 }
 
-static char	*expand_variable(char **envp, char *token, size_t *i)
+static char	*expand_variable(char **envp, char *token, size_t i)
 {
 	size_t	j;
 	char	*temp;
 	char	*env;
 	char	*new_token;
 
-	j = *i;
-	while (token[*i] && token[*i] != '\"' && token[*i] != '\''
-		&& token[*i] != ' ' && token[*i] != '$')
-		(*i)++;
-	temp = str_range_cpy(token, j, *i);
+	j = i;
+	while (token[i] && token[i] != '\"' && token[i] != '\''
+		&& token[i] != ' ' && token[i] != '$')
+		(i)++;
+	temp = str_range_cpy(token, j, i);
 	env = get_var(envp, temp);
 	if (ft_strlen(temp) == 0)
-		new_token = str_insert(token, "$", j - 1, *i - 1);
+		new_token = str_insert(token, "$", j - 1, i - 1);
 	else
-		new_token = str_insert(token, env, j - 1, *i - 1);
-	*i = j;
+		new_token = str_insert(token, env, j - 1, i - 1);
+	i = j;
 	if (ft_strcmp(temp, "?") == 0)
 		free(env);
 	free(temp);
@@ -89,14 +90,14 @@ static char	*get_var(char **envp, char *varname)
 
 static size_t	find_var(char *var, char *varname)
 {
-	size_t	i;
+	char	*temp;
 
-	i = 0;
-	while (varname[i] && var[i] != '=')
+	temp = str_range_cpy(var, 0, find_chr(var, '='));
+	if (!ft_strcmp(temp, varname))
 	{
-		if (var[i] != varname[i])
-			return (0);
-		i++;
+		free(temp);
+		return (1);
 	}
-	return (1);
+	free(temp);
+	return (0);
 }
