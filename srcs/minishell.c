@@ -13,8 +13,9 @@
 #include "get_next_line.h"
 #include "minishell.h"
 
-static void	set_signal_handling();
-static void	reset_signal_handling();
+static void	set_signal_handling(void);
+static void	reset_signal_handling(void);
+static void	free_pwd_env(t_data *data);
 
 int	g_status = 0;
 
@@ -35,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 	t_app	app;
 	t_data	data;
 
-	if ((argc || argv ) && envp)
+	if ((argc || argv) && envp)
 		envpd = init_env(envp);
 	if (!envpd)
 		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
@@ -56,8 +57,10 @@ int	main(int argc, char **argv, char **envp)
 			if (check_line(app.line))
 			{
 				add_history(app.line);
-				start_parser(&app);
-				start_my_execute(app, envpd, &data);
+				if (start_parser(&app))
+				{
+					start_my_execute(app, envpd, &data);
+				}
 				free_cmds(&app);
 			}
 		}
@@ -71,22 +74,33 @@ int	main(int argc, char **argv, char **envp)
 		app.line = readline(">> ");
 		reset_signal_handling();
 	}
-	free(data.pwd);
-	for (int i = 0; data.env[i]; i++)
-		free(data.env[i]);
-	free(data.env);
+	free_pwd_env(&data);
 	// ************* (183)
 	return (0);
 }
 
-static void	set_signal_handling()
+static void	set_signal_handling(void)
 {
 	signal(SIGQUIT, &sig_quit);
 	signal(SIGINT, &sig_int);
 }
 
-static void	reset_signal_handling()
+static void	reset_signal_handling(void)
 {
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
+}
+
+static void	free_pwd_env(t_data *data)
+{
+	size_t	i;
+
+	free(data->pwd);
+	i = 0;
+	while (data->env[i])
+	{
+		free(data->env[i]);
+		i++;
+	}
+	free(data->env);
 }

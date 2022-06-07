@@ -26,6 +26,10 @@
 # define MALLOC_ERROR "Error : Malloc returned NULL\n"
 # define MALLOC_ERROR_CODE 1
 # define PIPE_ERROR "Error : Pipe\n"
+# define SYNTAX_ERROR_CODE 2
+# define NO_FILE_MENTIONED_ERROR "Error: no file after redirect/pipe\n"
+# define UNEXPECTED_SYMBOL_ERROR "Error: unexpected symbol\n"
+# define UNCLOSED_QUOTES_ERROR "Error: unclosed quotes\n"
 
 # define HEREDOC ".heredoc_tmp"
 
@@ -130,7 +134,7 @@ void	perror_sentence(char *err, int status);
 int	ft_strcmp(const char *str1, const char *str2);
 
 /* parser.c */
-void	start_parser(t_app *app);
+int	start_parser(t_app *app);
 void	free_cmds(t_app *app);
 void	free_tokens(t_app *app);
 
@@ -161,13 +165,13 @@ char    **array_remove(char **array, size_t index);
 void	handle_redirects(t_app *app, size_t i, size_t cmd_i);
 
 /* syntax_checker.c */
-void	start_syntax_checker(t_app *app);
+int	start_syntax_checker(t_app *app);
 
 /* check_line.c */
 int	check_line(char *line);
 
 /* check_tokens.c */
-void	check_tokens(t_app *app);
+int	check_tokens(t_app *app);
 
 /* signals.c */
 void	sig_quit(int code);

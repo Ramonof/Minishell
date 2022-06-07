@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 11:29:41 by mrolande          #+#    #+#             */
-/*   Updated: 2022/05/22 11:29:41 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:34:13 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,6 @@
 // 	return (*envp + 5);
 // }
 
-// void	handle_pwd(t_data *data)
-// {
-// 	ft_putstr(data->pwd);
-// 	ft_putstr("\n");
-// 	// g_status = 0;
-// }
-
 void	handle_pwd(void)
 {
 	char	*cwd;
@@ -38,4 +31,3 @@ void	handle_pwd(void)
 	g_status = 0;
 	free(cwd);
 }
-

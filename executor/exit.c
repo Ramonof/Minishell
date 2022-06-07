@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 11:59:15 by mrolande          #+#    #+#             */
-/*   Updated: 2022/06/02 16:17:29 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:46:41 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	error_sentence(char *str, int status)
 	ft_putstr_fd(str, 2);
 }
 
-int		is_number(char *str)
+int	is_number(char *str)
 {
 	int	i;
 

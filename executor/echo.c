@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 12:12:02 by mrolande          #+#    #+#             */
-/*   Updated: 2022/06/02 12:20:14 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:31:40 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	handle_echo(char **args)
 {
-	int i;
-	int n_flag;
+	int	i;
+	int	n_flag;
 
 	i = 1;
 	n_flag = 0;

@@ -1,15 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/08 00:25:11 by etobias           #+#    #+#             */
+/*   Updated: 2022/06/08 00:25:11 by etobias          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	start_parser(t_app *app)
+int	start_parser(t_app *app)
 {
-	start_syntax_checker(app);
+	int	code;
+
 	app->tokens = NULL;
-	get_tokens(app);
-	check_tokens(app);
-	expand_tokens(app);
-	alloc_cmds(app);
-	get_cmds(app);
+	app->cmds = NULL;
+	code = 0;
+	if (start_syntax_checker(app))
+	{
+		get_tokens(app);
+		if (check_tokens(app))
+		{
+			expand_tokens(app);
+			alloc_cmds(app);
+			get_cmds(app);
+			code = 1;
+		}
+	}
 	free_tokens(app);
+	return (code);
 }
 
 void	free_tokens(t_app *app)
@@ -30,6 +52,8 @@ void	free_cmds(t_app *app)
 	size_t	i;
 	size_t	j;
 
+	if (!app->cmds)
+		return ;
 	i = 0;
 	while (app->cmds[i])
 	{

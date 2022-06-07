@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 12:22:31 by mrolande          #+#    #+#             */
-/*   Updated: 2022/06/06 15:20:54 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:45:50 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_env(char **env)
 	free(env);
 }
 
-int		envlen(char **env)
+int	envlen(char **env)
 {
 	int	i;
 

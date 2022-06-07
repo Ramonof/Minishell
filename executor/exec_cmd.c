@@ -93,7 +93,7 @@ void	handle_exec(t_pipex p, t_command cmd_st, char **envp)
 
 void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 {
-	char *cmd_full;
+	char	*cmd_full;
 
 	// if (p.idx == 0)
 	// 	sub_dup2(p.infile, p.pipe[1]);

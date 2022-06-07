@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 11:29:47 by mrolande          #+#    #+#             */
-/*   Updated: 2022/05/29 11:29:47 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:36:42 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	fill_envpd2(char **envp, char **envpd)
 {
-	int	i, j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (envp[i])
@@ -24,7 +25,7 @@ int	fill_envpd2(char **envp, char **envpd)
 		{
 			j++;
 		}
-		envpd[i] = (char *)malloc(sizeof(char) * (j+1));
+		envpd[i] = (char *)malloc(sizeof(char) * (j + 1));
 		if (!envpd[i])
 			return (ret_err("malc"));
 		j = 0;
@@ -42,13 +43,13 @@ int	fill_envpd2(char **envp, char **envpd)
 
 char	**fill_envpd(char **envp)
 {
-	int	i;
-	char **envpd;
+	int		i;
+	char	**envpd;
 
 	i = 0;
 	while (envp[i])
 		i++;
-	envpd = (char **)malloc(sizeof(char*) * (i+1));
+	envpd = (char **)malloc(sizeof(char *) * (i + 1));
 	if (!envpd)
 		return (ret_err_char("malc"));
 	if (fill_envpd2(envp, envpd))
@@ -70,11 +71,10 @@ void	print_envp(char **envpd)
 
 char	**init_env(char **envp)
 {
-	char **envpd;
+	char	**envpd;
 
 	envpd = fill_envpd(envp);
 	if (!envpd)
 		return (ret_err_char("malloc"));
-	//print_envp(envpd);
 	return (envpd);
 }

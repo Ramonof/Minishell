@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:01:14 by mrolande          #+#    #+#             */
-/*   Updated: 2022/04/13 17:01:14 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:46:27 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	change_env_pwd(t_data *data)
 {
-	char *pwd;
+	char	*pwd;
 
 	data->pwd = getcwd(NULL, 0);
 	if (var_index("PWD", data) >= 0)
@@ -33,8 +33,8 @@ void	change_env_pwd(t_data *data)
 
 void	change_env_oldpwd(t_data *data)
 {
-	char *pwd;
-	char *oldpwd;
+	char	*pwd;
+	char	*oldpwd;
 
 	if (var_index("OLDPWD", data) >= 0)
 	{
@@ -49,7 +49,7 @@ void	change_env_oldpwd(t_data *data)
 	free(data->pwd);
 }
 
-int		change_pwd(t_data *data, char *input)
+int	change_pwd(t_data *data, char *input)
 {
 	char	*pwd;
 	char	*cwd;

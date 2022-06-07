@@ -79,12 +79,12 @@ void	parent_free(t_pipex *pipex, int mode)
 
 void	my_execute(t_app app, char **envp)
 {
-	t_pipex pipex;
+	t_pipex	pipex;
 	int		status;
 
 	status = 0;
 	pipex.infile = app.cmds[0][0].input_desc;
-	pipex.outfile = app.cmds[app.cmd_number-1][0].output_desc;
+	pipex.outfile = app.cmds[app.cmd_number - 1][0].output_desc;
 	pipex.pipe_nmbs = 2 * (app.cmd_number - 1);
 	pipex.cmd_nmbs = app.cmd_number;
 	pipex.pipe = (int *)malloc(sizeof(int) * pipex.pipe_nmbs);

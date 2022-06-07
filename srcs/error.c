@@ -23,7 +23,7 @@ void	msg_pipe(char *err)
 	write(2, "Command not found: ", ft_strlen("Command not found: "));
 	write(2, err, ft_strlen(err));
 	write(2, "\n", 1);
-    exit(1);
+	exit(1);
 }
 
 void	errno_exit(char *err)

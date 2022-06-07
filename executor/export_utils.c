@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 11:56:24 by mrolande          #+#    #+#             */
-/*   Updated: 2022/05/29 12:27:39 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:46:09 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		check_export(char *str)
+int	check_export(char *str)
 {
 	int	i;
 
@@ -28,10 +28,10 @@ int		check_export(char *str)
 	return (1);
 }
 
-int		print_export(char **env)
+int	print_export(char **env)
 {
 	int	i;
-	int j;
+	int	j;
 	int	equal;
 
 	i = -1;

@@ -12,25 +12,32 @@
 
 #include "minishell.h"
 
-int		cd_minus(t_data *data)
+int	cd_minus(t_data *data)
 {
-	if (var_index("OLDPWD=", data) < 0 ||
-	chdir((strchr(data->env[var_index("OLDPWD=", data)], '=') + 1)) == -1)
+	int	index;
+
+	index = var_index("OLDPWD=", data);
+	if (index < 0
+		|| chdir((strchr(data->env[index], '=') + 1)) == -1)
+	{
 		return (0);
+	}
 	change_pwd(data, NULL);
 	return (1);
 }
 
-int		cd_alone(t_data *data)
+int	cd_alone(t_data *data)
 {
-	if (var_index("HOME=", data) < 0 ||
-	chdir((strchr(data->env[var_index("HOME=", data)], '=') + 1)) == -1)
+	if (var_index("HOME=", data) < 0
+		|| chdir((strchr(data->env[var_index("HOME=", data)], '=') + 1)) == -1)
+	{
 		return (0);
+	}
 	change_pwd(data, NULL);
 	return (1);
 }
 
-int		cd_path(char **args, t_data *data)
+int	cd_path(char **args, t_data *data)
 {
 	if (chdir(args[1]) == -1)
 		return (0);
