@@ -98,6 +98,7 @@ bonus: $(NAME)
 
 clean:
 	$(RM) $(OBJ_DIR)
+	$(RM) .heredoc_tmp
 	$(MAKE) clean -C ./libft
 
 fclean: clean
