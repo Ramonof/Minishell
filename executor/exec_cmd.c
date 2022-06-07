@@ -35,7 +35,7 @@ static char	*get_cmd(char **paths, char *cmd)
 		free(command);
 		paths++;
 	}
-	return (cmd);
+	return (NULL);
 }
 
 static void	sub_dup2(t_command cmd_st, int zero, int first)
@@ -102,6 +102,8 @@ void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 	// else
 	// 	sub_dup2(p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
 	cmd_full = get_cmd(p.cmd_paths, cmd_st.args[0]);
+	if (!cmd_full)
+		errno_exit(cmd_st.args[0]);
 	if (execve(cmd_full, cmd_st.args, envp) < 0)
 		perror(cmd_st.args[0]);
 	exit(errno);

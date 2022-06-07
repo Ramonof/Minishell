@@ -25,6 +25,7 @@
 
 # define MALLOC_ERROR "Error : Malloc returned NULL\n"
 # define MALLOC_ERROR_CODE 1
+# define PIPE_ERROR "Error : Pipe\n"
 
 typedef struct s_cmd
 {
@@ -121,6 +122,7 @@ void	error_exit(char *err);
 int		ret_err(char *msg);
 char	**ret_err_char(char *msg);
 void	void_err(char *msg);
+void	perror_sentence(char *err, int status);
 
 /* strcmp.c */
 int	ft_strcmp(const char *str1, const char *str2);

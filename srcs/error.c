@@ -29,7 +29,13 @@ void	msg_pipe(char *err)
 void	errno_exit(char *err)
 {
 	perror(err);
-	exit (1);
+	exit (errno);
+}
+
+void	perror_sentence(char *err, int status)
+{
+	g_status = status;
+	perror(err);
 }
 
 int	ret_err(char *msg)

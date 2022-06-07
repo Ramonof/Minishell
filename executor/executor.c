@@ -20,7 +20,7 @@ static void	creat_pipes(t_pipex *pipex)
 	while (i < pipex->cmd_nmbs - 1)
 	{
 		if (pipe(pipex->pipe + 2 * i) < 0)
-			ret_err("Pipe"); //parent_free(pipex, 1);
+			perror_sentence("PIPE", errno); //parent_free(pipex, 1);
 		i++;
 	}
 }
@@ -41,7 +41,7 @@ char	*find_path(char **envp)
 {
 	if (!envp)
 		return (NULL);
-	while (ft_strncmp("PATH=", *envp, 5))
+	while (*envp && ft_strncmp("PATH=", *envp, 5))
 		envp++;
 	if (!*envp)
 		return (NULL);
@@ -90,10 +90,10 @@ void	my_execute(t_app app, char **envp)
 	pipex.pipe = (int *)malloc(sizeof(int) * pipex.pipe_nmbs);
 	pipex.env_path = find_path(envp);
 	pipex.cmd_paths = ft_split(pipex.env_path, ':');
-	if (!pipex.cmd_paths || !pipex.pipe)
-		error_sentence("malloc", 1);
+	if ((!pipex.cmd_paths && find_path(envp)) || !pipex.pipe)
+		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
 	if (!pipex.pipe)
-		return (error_sentence("Pipe", 1));
+		return ;
 	creat_pipes(&pipex);
 
 	pipex.idx = -1;
