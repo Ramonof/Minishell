@@ -60,7 +60,7 @@ static void	sub_dup2(t_command cmd_st, int zero, int first)
 
 void	handle_exec(t_pipex p, t_command cmd_st, char **envp)
 {
-	int		status = 0;
+	// int		status = 0;
 
 	p.pid = fork();
 	if (p.pid < 0)
@@ -86,9 +86,9 @@ void	handle_exec(t_pipex p, t_command cmd_st, char **envp)
 			exec_cmd(p, cmd_st, envp);
 		exit(g_status);
 	}
-	else
-		waitpid(p.pid, &status, 0);
-	g_status = WEXITSTATUS(status);
+	// else
+	// 	waitpid(p.pid, &status, 0);
+	// g_status = WEXITSTATUS(status);
 }
 
 void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)

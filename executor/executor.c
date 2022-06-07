@@ -80,9 +80,9 @@ void	parent_free(t_pipex *pipex, int mode)
 void	my_execute(t_app app, char **envp)
 {
 	t_pipex pipex;
-	// int		status;
+	int		status;
 
-	// status = 0;
+	status = 0;
 	pipex.infile = app.cmds[0][0].input_desc;
 	pipex.outfile = app.cmds[app.cmd_number-1][0].output_desc;
 	pipex.pipe_nmbs = 2 * (app.cmd_number - 1);
@@ -102,10 +102,10 @@ void	my_execute(t_app app, char **envp)
 		handle_exec(pipex, app.cmds[pipex.idx][0], envp);
 	}
 	close_pipes(&pipex);
-	// while (pipex.idx--)
-	// 	waitpid(-1, &status, 0);
-	// g_status = WEXITSTATUS(status);
-	printf("%d\n", g_status);
+	while (pipex.idx--)
+		waitpid(-1, &status, 0);
+	g_status = WEXITSTATUS(status);
+	printf("ret code %d\n", g_status);
 	parent_free(&pipex, 0);
 }
 
