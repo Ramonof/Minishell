@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:24:59 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/08 00:24:59 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/14 12:16:10 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static char	*expand_token(char **envp, char *token)
 				i = i + 1 + (size_t)find_chr(token + i + 1, '\'');
 		if (token[i] == '$')
 		{
-			i++;
 			token = expand_variable(envp, token, i);
-			i -= 2;
+			if (!token[i])
+				i--;
 		}
 		i++;
 	}
@@ -58,10 +58,10 @@ static char	*expand_variable(char **envp, char *token, size_t i)
 	char	*env;
 	char	*new_token;
 
-	j = i;
+	j = ++i;
 	while (token[i] && token[i] != '\"' && token[i] != '\''
 		&& token[i] != ' ' && token[i] != '$')
-		(i)++;
+		i++;
 	temp = str_range_cpy(token, j, i);
 	env = get_var(envp, temp);
 	if (ft_strlen(temp) == 0)

@@ -51,7 +51,6 @@ int	main(int argc, char **argv, char **envp)
 	reset_signal_handling();
 	while (app.line)
 	{
-		printf("Line: %s\n", app.line);
 		if (strlen(app.line) > 0)
 		{
 			if (check_line(app.line))
@@ -75,7 +74,6 @@ int	main(int argc, char **argv, char **envp)
 		reset_signal_handling();
 	}
 	free_pwd_env(&data);
-	// ************* (183)
 	return (0);
 }
 

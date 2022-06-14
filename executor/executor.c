@@ -105,7 +105,6 @@ void	my_execute(t_app app, char **envp)
 	while (pipex.idx--)
 		waitpid(-1, &status, 0);
 	g_status = WEXITSTATUS(status);
-	printf("ret code %d\n", g_status);
 	parent_free(&pipex, 0);
 }
 
