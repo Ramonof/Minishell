@@ -84,9 +84,7 @@ void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 	char	*cmd_full;
 
 	cmd_full = get_cmd(p.cmd_paths, cmd_st.args[0]);
-	if (!cmd_full)
-		errno_exit(cmd_st.args[0]);
-	if (execve(cmd_full, cmd_st.args, envp) < 0)
-		perror(cmd_st.args[0]);
-	exit(errno);
+	if (cmd_full)
+		execve(cmd_full, cmd_st.args, envp);
+	errno_exit(cmd_st.args[0]);
 }
