@@ -127,7 +127,7 @@ void	start_my_execute(t_app app, char **envp, t_data *data)
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "echo", 5))
 		handle_echo(app.cmds[0][0].args);
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "pwd", 4))
-		handle_pwd();
+		handle_pwd(app.cmds[0][0]);
 	else
 		my_execute(app, envp);
 }

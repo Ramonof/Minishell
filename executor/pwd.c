@@ -21,13 +21,13 @@
 // 	return (*envp + 5);
 // }
 
-void	handle_pwd(void)
+void	handle_pwd(t_command cmd_st)
 {
 	char	*cwd;
 
 	cwd = getcwd(NULL, 0);
-	ft_putstr_fd(cwd, 1);
-	ft_putstr_fd("\n", 1);
+	ft_putstr_fd(cwd, cmd_st.output_desc);
+	ft_putstr_fd("\n", cmd_st.output_desc);
 	g_status = 0;
 	free(cwd);
 }

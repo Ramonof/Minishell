@@ -64,7 +64,7 @@ void	handle_exec(t_pipex p, t_command cmd_st, char **envp)
 
 	p.pid = fork();
 	if (p.pid < 0)
-		write(2, "fork", ft_strlen("fork"));
+		perror(cmd_st.args[0]);
 	if (!p.pid)
 	{
 		if (p.pipe_nmbs == 0)
@@ -81,26 +81,17 @@ void	handle_exec(t_pipex p, t_command cmd_st, char **envp)
 		else if (!ft_strncmp(cmd_st.args[0], "echo", 5))
 			handle_echo(cmd_st.args);
 		else if (!ft_strncmp(cmd_st.args[0], "pwd", 4))
-			handle_pwd();
+			handle_pwd(cmd_st);
 		else
 			exec_cmd(p, cmd_st, envp);
 		exit(g_status);
 	}
-	// else
-	// 	waitpid(p.pid, &status, 0);
-	// g_status = WEXITSTATUS(status);
 }
 
 void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 {
 	char	*cmd_full;
 
-	// if (p.idx == 0)
-	// 	sub_dup2(p.infile, p.pipe[1]);
-	// else if (p.idx == p.cmd_nmbs - 1)
-	// 	sub_dup2(p.pipe[2 * p.idx - 2], p.outfile);
-	// else
-	// 	sub_dup2(p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
 	cmd_full = get_cmd(p.cmd_paths, cmd_st.args[0]);
 	if (!cmd_full)
 		errno_exit(cmd_st.args[0]);

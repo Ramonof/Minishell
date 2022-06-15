@@ -109,7 +109,7 @@ char	**dup_env(char **env);
 void	handle_env(char **env);
 
 /* pwd.c */
-void	handle_pwd(void);
+void	handle_pwd(t_command cmd_st);
 
 /* echo.c */
 void	handle_echo(char **args);
