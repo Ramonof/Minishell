@@ -35,39 +35,39 @@
 
 typedef struct s_cmd
 {
-	int		cmd_nmbs;       // Количество комманд
-	int		pipe_nmbs;      // Количество труб
-	char	*env_path;      // Константа PATH
-	char	**cmd_paths;    // Константа PATH, разделенная
-	char	*cmd;           // Команда
-	char	**cmd_args;     // Флажки
-	int		here_doc;       // Флажок <<
-	pid_t	pid;            // Для каждого процесса свой
-	int		infile;         // Вход файл удар
-	int		outfile;        // Выход файл удар
-	int		*pipe;          // Массив дескрипторов связаных функцией pipe
-	int		idx;            // Номер процесса
+	int		cmd_nmbs;
+	int		pipe_nmbs;
+	char	*env_path;
+	char	**cmd_paths;
+	char	*cmd;
+	char	**cmd_args;
+	int		here_doc;
+	pid_t	pid;
+	int		infile;
+	int		outfile;
+	int		*pipe;
+	int		idx;
 }	t_pipex;
 
-typedef	struct	s_data
+typedef struct s_data
 {
 	char		**env;
 	char		*pwd;
 }	t_data;
 
-typedef struct	s_command
+typedef struct s_command
 {
-	char	**args;			// массив аргументов
-	int		input_desc;		// входной дескриптор
-	int		output_desc;	// выходной дескриптор
+	char	**args;
+	int		input_desc;
+	int		output_desc;
 }	t_command;
 
 typedef struct s_app
 {
-	char		*line;				// прочтённая строка
-	char		**tokens;			// массив отдельных токенов
-	t_command	**cmds;				// массив указателей на команды
-	int			cmd_number;			// число команд
+	char		*line;
+	char		**tokens;
+	t_command	**cmds;
+	int			cmd_number;
 	t_data		*data;
 }	t_app;
 
@@ -75,6 +75,7 @@ extern int		g_status;
 
 /* init_env.c */
 char	**init_env(char **envp);
+char	*find_pwd(char **envp);
 
 /* executor.c */
 void	start_my_execute(t_app app, char **envp, t_data *data);
@@ -82,6 +83,12 @@ void	my_execute(t_app app, char **envp);
 void	exec_cmd(t_pipex p, t_command cmd_st, char **envp);
 void	handle_exec(t_pipex p, t_command cmd_st, char **envp);
 void	close_pipes(t_pipex *pipex);
+void	handle_exec_type(t_pipex p, t_command cmd_st, char **envp);
+
+/* exec_utils.c */
+void	parent_free(t_pipex *pipex);
+char	*find_path(char **envp);
+void	init_p(int *status, t_pipex	*pipex, t_app app);
 
 /* cd */
 void	handle_cd(char **args, t_data *data);
@@ -131,10 +138,10 @@ void	void_err(char *msg);
 void	perror_sentence(char *err, int status);
 
 /* strcmp.c */
-int	ft_strcmp(const char *str1, const char *str2);
+int		ft_strcmp(const char *str1, const char *str2);
 
 /* parser.c */
-int	start_parser(t_app *app);
+int		start_parser(t_app *app);
 void	free_cmds(t_app *app);
 void	free_tokens(t_app *app);
 
@@ -159,19 +166,19 @@ char	*delete_quotes(char *token);
 
 /* array_operations.c */
 char	**array_add(char **array, char *str);
-char    **array_remove(char **array, size_t index);
+char	**array_remove(char **array, size_t index);
 
 /* handle_redirects.c */
 void	handle_redirects(t_app *app, size_t i, size_t cmd_i);
 
 /* syntax_checker.c */
-int	start_syntax_checker(t_app *app);
+int		start_syntax_checker(t_app *app);
 
 /* check_line.c */
-int	check_line(char *line);
+int		check_line(char *line);
 
 /* check_tokens.c */
-int	check_tokens(t_app *app);
+int		check_tokens(t_app *app);
 
 /* signals.c */
 void	sig_quit(int code);

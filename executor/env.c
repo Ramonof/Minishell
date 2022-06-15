@@ -59,11 +59,9 @@ void	handle_env(char **env, t_command cmd_st)
 	char	*str;
 
 	i = 0;
+	g_status = 0;
 	if (!env)
-	{
-		g_status = 0;
 		return ;
-	}
 	while (env[i])
 	{
 		str = ft_strstr(env[i], "=");
@@ -79,5 +77,4 @@ void	handle_env(char **env, t_command cmd_st)
 		}
 		i++;
 	}
-	g_status = 0;
 }

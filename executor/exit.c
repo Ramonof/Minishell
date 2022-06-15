@@ -52,7 +52,6 @@ void	handle_exit(char **inputs, t_data *data)
 		else
 			error_sentence("\t\tminishell: numeric argument is required\n", 2);
 	}
-	// free_env(inputs);
 	free(data->pwd);
 	free_env(data->env);
 	exit(g_status);

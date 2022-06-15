@@ -19,36 +19,8 @@ static void	free_pwd_env(t_data *data);
 
 int	g_status = 0;
 
-char	*find_pwd(char **envp)
+void	main_cycle(t_app app, char **envpd, t_data data)
 {
-	if (!envp)
-		return (NULL);
-	while (ft_strncmp("PWD=", *envp, 4))
-		envp++;
-	if (!*envp)
-		return (NULL);
-	return (*envp + 4);
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	char	**envpd;
-	t_app	app;
-	t_data	data;
-
-	if ((argc || argv) && envp)
-		envpd = init_env(envp);
-	if (!envpd)
-		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
-	data.env = envpd;
-	app.data = &data;
-	// data.pwd = getcwd(NULL, 0);
-	data.pwd = ft_strdup(find_pwd(envp));
-	if (!data.pwd)
-		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
-	set_signal_handling();
-	app.line = readline(">> ");
-	reset_signal_handling();
 	while (app.line)
 	{
 		if (strlen(app.line) > 0)
@@ -73,6 +45,27 @@ int	main(int argc, char **argv, char **envp)
 		app.line = readline(">> ");
 		reset_signal_handling();
 	}
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	char	**envpd;
+	t_app	app;
+	t_data	data;
+
+	if ((argc || argv) && envp)
+		envpd = init_env(envp);
+	if (!envpd)
+		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
+	data.env = envpd;
+	app.data = &data;
+	data.pwd = ft_strdup(find_pwd(envp));
+	if (!data.pwd)
+		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
+	set_signal_handling();
+	app.line = readline(">> ");
+	reset_signal_handling();
+	main_cycle(app, envpd, data);
 	free_pwd_env(&data);
 	return (0);
 }

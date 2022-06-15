@@ -12,6 +12,17 @@
 
 #include "minishell.h"
 
+char	*find_pwd(char **envp)
+{
+	if (!envp)
+		return (NULL);
+	while (*envp && ft_strncmp("PWD=", *envp, 4))
+		envp++;
+	if (!*envp)
+		return (NULL);
+	return (*envp + 4);
+}
+
 int	fill_envpd2(char **envp, char **envpd)
 {
 	int	i;

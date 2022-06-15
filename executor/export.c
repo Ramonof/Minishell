@@ -6,13 +6,13 @@
 /*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 11:56:18 by mrolande          #+#    #+#             */
-/*   Updated: 2022/06/02 16:04:33 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/15 21:54:21 by mrolande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		var_index(char *name, t_data *data)
+int	var_index(char *name, t_data *data)
 {
 	int		y;
 	int		x;

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	creat_pipes(t_pipex *pipex)
+static int	creat_pipes(t_pipex *pipex)
 {
 	int	i;
 
@@ -20,9 +20,13 @@ static void	creat_pipes(t_pipex *pipex)
 	while (i < pipex->cmd_nmbs - 1)
 	{
 		if (pipe(pipex->pipe + 2 * i) < 0)
-			perror_sentence("PIPE", errno); //parent_free(pipex, 1);
+		{
+			perror_sentence("PIPE", errno);
+			return (1);
+		}
 		i++;
 	}
+	return (0);
 }
 
 void	close_pipes(t_pipex *pipex)
@@ -37,44 +41,24 @@ void	close_pipes(t_pipex *pipex)
 	}
 }
 
-char	*find_path(char **envp)
+void	handle_exec_type(t_pipex p, t_command cmd_st, char **envp)
 {
-	if (!envp)
-		return (NULL);
-	while (*envp && ft_strncmp("PATH=", *envp, 5))
-		envp++;
-	if (!*envp)
-		return (NULL);
-	return (*envp + 5);
-}
-
-void	parent_free(t_pipex *pipex, int mode)
-{
-	int	i;
-
-	i = 0;
-	// close(pipex->infile);
-	// close(pipex->outfile);
-	// if (pipex->here_doc)
-	// 	unlink(".heredoc_tmp");
-	if (pipex->cmd_paths)
-	{
-		while (pipex->cmd_paths[i])
-		{
-			free(pipex->cmd_paths[i]);
-			i++;
-		}
-	}
-	if (pipex->cmd_paths)
-		free(pipex->cmd_paths);
-	if (pipex->pipe)
-		free(pipex->pipe);
-	if (mode == 1)
-	{
-		// msg_error("Pipe");
-		printf("Pipe");
-		exit(1);
-	}
+	if (!ft_strncmp(cmd_st.args[0], "env", 4))
+		handle_env(envp, cmd_st);
+	else if (!ft_strncmp(cmd_st.args[0], "echo", 5))
+		handle_echo(cmd_st.args, cmd_st);
+	else if (!ft_strncmp(cmd_st.args[0], "pwd", 4))
+		handle_pwd(cmd_st);
+	else if (!ft_strncmp(cmd_st.args[0], "cd", 3))
+		exit(0);
+	else if (!ft_strncmp(cmd_st.args[0], "unset", 6))
+		exit(0);
+	else if (!ft_strncmp(cmd_st.args[0], "export", 7))
+		exit(0);
+	else if (!ft_strncmp(cmd_st.args[0], "exit", 5))
+		exit(0);
+	else
+		exec_cmd(p, cmd_st, envp);
 }
 
 void	my_execute(t_app app, char **envp)
@@ -82,11 +66,7 @@ void	my_execute(t_app app, char **envp)
 	t_pipex	pipex;
 	int		status;
 
-	status = 0;
-	pipex.infile = app.cmds[0][0].input_desc;
-	pipex.outfile = app.cmds[app.cmd_number - 1][0].output_desc;
-	pipex.pipe_nmbs = 2 * (app.cmd_number - 1);
-	pipex.cmd_nmbs = app.cmd_number;
+	init_p(&status, &pipex, app);
 	pipex.pipe = (int *)malloc(sizeof(int) * pipex.pipe_nmbs);
 	pipex.env_path = find_path(envp);
 	pipex.cmd_paths = ft_split(pipex.env_path, ':');
@@ -94,8 +74,8 @@ void	my_execute(t_app app, char **envp)
 		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
 	if (!pipex.pipe)
 		return ;
-	creat_pipes(&pipex);
-
+	if (creat_pipes(&pipex))
+		return (parent_free(&pipex));
 	pipex.idx = -1;
 	while (++(pipex.idx) < app.cmd_number)
 	{
@@ -105,7 +85,7 @@ void	my_execute(t_app app, char **envp)
 	while (pipex.idx--)
 		waitpid(-1, &status, 0);
 	g_status = WEXITSTATUS(status);
-	parent_free(&pipex, 0);
+	parent_free(&pipex);
 }
 
 void	start_my_execute(t_app app, char **envp, t_data *data)

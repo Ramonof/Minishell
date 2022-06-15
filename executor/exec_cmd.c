@@ -60,8 +60,6 @@ static void	sub_dup2(t_command cmd_st, int zero, int first)
 
 void	handle_exec(t_pipex p, t_command cmd_st, char **envp)
 {
-	// int		status = 0;
-
 	p.pid = fork();
 	if (p.pid < 0)
 		perror(cmd_st.args[0]);
@@ -76,14 +74,7 @@ void	handle_exec(t_pipex p, t_command cmd_st, char **envp)
 		else
 			sub_dup2(cmd_st, p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
 		close_pipes(&p);
-		if (!ft_strncmp(cmd_st.args[0], "env", 4))
-			handle_env(envp, cmd_st);
-		else if (!ft_strncmp(cmd_st.args[0], "echo", 5))
-			handle_echo(cmd_st.args, cmd_st);
-		else if (!ft_strncmp(cmd_st.args[0], "pwd", 4))
-			handle_pwd(cmd_st);
-		else
-			exec_cmd(p, cmd_st, envp);
+		handle_exec_type(p, cmd_st, envp);
 		exit(g_status);
 	}
 }

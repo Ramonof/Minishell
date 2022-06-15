@@ -10,6 +10,7 @@ OBJ_DIR	= ./obj/
 
 SRC_FILES = minishell.c \
 			error.c \
+			error_ret.c \
 			init_env.c \
 			strcmp.c \
 			signals.c
@@ -27,7 +28,8 @@ EXEC_FILES = 	executor.c \
 				env.c \
 				exit.c \
 				echo.c \
-				pwd.c
+				pwd.c \
+				exec_utils.c
 
 PARS_FILES =	parser.c \
 				parser_utils.c \
