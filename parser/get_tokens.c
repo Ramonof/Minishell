@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:25:02 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/08 00:25:02 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/15 23:12:35 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static char	*get_next_token(char *str, size_t *i);
 static void	skip_quotes(char *str, size_t *i);
 static int	find_redirection(char *str, size_t *i, size_t j);
+static int	find_pipe(char *str, size_t *i, size_t j);
 
 void	get_tokens(t_app *app)
 {
@@ -42,6 +43,8 @@ static char	*get_next_token(char *str, size_t *i)
 	{
 		skip_quotes(str, i);
 		if (find_redirection(str, i, j))
+			break ;
+		if (find_pipe(str, i, j))
 			break ;
 		(*i)++;
 	}
@@ -76,6 +79,19 @@ static int	find_redirection(char *str, size_t *i, size_t j)
 		if (*i != j)
 			return (1);
 		while (str[*i] == '<')
+			(*i)++;
+		return (1);
+	}
+	return (0);
+}
+
+static int	find_pipe(char *str, size_t *i, size_t j)
+{
+	if (str[*i] == '|')
+	{
+		if (*i != j)
+			return (1);
+		while (str[*i] == '|')
 			(*i)++;
 		return (1);
 	}

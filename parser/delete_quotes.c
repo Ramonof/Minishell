@@ -6,59 +6,69 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:24:56 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/14 18:04:39 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/16 00:23:56 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char		*remove_quotes(char *str);
+static void		copy_before_quotes(char *new_str, char *str,
+					size_t *i, size_t *j);
+static void		copy_in_quotes(char *new_str, char *str,
+					size_t *i, size_t *j);
 static size_t	get_size(char *str);
 
 char	*delete_quotes(char *token)
 {
-	char	*temp;
-
-	temp = token;
-	token = remove_quotes(token);
-	free(temp);
-	return (token);
-}
-
-static char	*remove_quotes(char *str)
-{
-	char	*new_str;
+	char	*new_token;
 	size_t	i;
 	size_t	j;
-	size_t	temp;
 
-	new_str = malloc(get_size(str));
+	new_token = malloc(get_size(token));
 	i = 0;
 	j = 0;
-	while (str[i])
+	while (token[i])
 	{
-		if (str[i] == '\'')
-		{
-			temp = i;
-			i = i + 2 + (size_t)find_chr(str + i + 1, '\'');
-			ft_memcpy(new_str + j, str + temp + 1, i - temp - 2);
-			j += i - temp - 2;
-		}
-		if (str[i] == '\"')
-		{
-			temp = i;
-			i = i + 2 + (size_t)find_chr(str + i + 1, '\"');
-			ft_memcpy(new_str + j, str + temp + 1, i - temp - 2);
-			j += i - temp - 2;
-		}
-		if (!str[i])
-			break ;
-		new_str[j] = str[i];
-		i++;
-		j++;
+		copy_before_quotes(new_token, token, &i, &j);
+		copy_in_quotes(new_token, token, &i, &j);
 	}
-	new_str[j] = '\0';
-	return (new_str);
+	new_token[j] = '\0';
+	free(token);
+	return (new_token);
+}
+
+static void	copy_before_quotes(char *new_str, char *str, size_t *i, size_t *j)
+{
+	while (str[*i])
+	{
+		if (str[*i] == '\'' || str[*i] == '\"')
+			return ;
+		new_str[*j] = str[*i];
+		(*i)++;
+		(*j)++;
+	}
+}
+
+static void	copy_in_quotes(char *new_str, char *str, size_t *i, size_t *j)
+{
+	char	quote;
+
+	if (str[*i] == '\'' || str[*i] == '\"')
+		quote = str[*i];
+	else
+		return ;
+	(*i)++;
+	while (str[*i])
+	{
+		if (str[*i] == quote)
+		{
+			(*i)++;
+			return ;
+		}
+		new_str[*j] = str[*i];
+		(*i)++;
+		(*j)++;
+	}
 }
 
 static size_t	get_size(char *str)
