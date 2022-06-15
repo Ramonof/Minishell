@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	handle_echo(char **args)
+void	handle_echo(char **args, t_command cmd_st)
 {
 	int	i;
 	int	n_flag;
@@ -24,11 +24,11 @@ void	handle_echo(char **args)
 		n_flag = 1;
 	while (args[i])
 	{
-		write(1, args[i], ft_strlen(args[i]));
+		write(cmd_st.output_desc, args[i], ft_strlen(args[i]));
 		if (args[i + 1])
-			write(1, " ", 1);
+			write(cmd_st.output_desc, " ", 1);
 		i++;
 	}
 	if (!n_flag)
-		write(1, "\n", 1);
+		write(cmd_st.output_desc, "\n", 1);
 }

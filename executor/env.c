@@ -52,7 +52,7 @@ char	**dup_env(char **env)
 	return (data_env);
 }
 
-void	handle_env(char **env)
+void	handle_env(char **env, t_command cmd_st)
 {
 	int		i;
 	int		j;
@@ -72,10 +72,10 @@ void	handle_env(char **env)
 			j = 0;
 			while (env[i][j])
 			{
-				write(1, &env[i][j], 1);
+				write(cmd_st.output_desc, &env[i][j], 1);
 				j++;
 			}
-			ft_putchar_fd('\n', 1);
+			ft_putchar_fd('\n', cmd_st.output_desc);
 		}
 		i++;
 	}

@@ -12,15 +12,6 @@
 
 #include "minishell.h"
 
-// char	*find_home(char **envp)
-// {
-// 	while (ft_strncmp("HOME", *envp, 4))
-// 		envp++;
-// 	if (!*envp)
-// 		return (NULL);
-// 	return (*envp + 5);
-// }
-
 void	handle_pwd(t_command cmd_st)
 {
 	char	*cwd;

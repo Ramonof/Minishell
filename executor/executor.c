@@ -121,11 +121,11 @@ void	start_my_execute(t_app app, char **envp, t_data *data)
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "export", 7))
 		handle_export(app.cmds[0][0].args, data);
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "env", 4))
-		handle_env(envp);
+		handle_env(envp, app.cmds[0][0]);
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "exit", 5))
 		handle_exit(app.cmds[0][0].args, data);
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "echo", 5))
-		handle_echo(app.cmds[0][0].args);
+		handle_echo(app.cmds[0][0].args, app.cmds[0][0]);
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "pwd", 4))
 		handle_pwd(app.cmds[0][0]);
 	else

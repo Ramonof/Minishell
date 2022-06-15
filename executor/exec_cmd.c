@@ -77,9 +77,9 @@ void	handle_exec(t_pipex p, t_command cmd_st, char **envp)
 			sub_dup2(cmd_st, p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
 		close_pipes(&p);
 		if (!ft_strncmp(cmd_st.args[0], "env", 4))
-			handle_env(envp);
+			handle_env(envp, cmd_st);
 		else if (!ft_strncmp(cmd_st.args[0], "echo", 5))
-			handle_echo(cmd_st.args);
+			handle_echo(cmd_st.args, cmd_st);
 		else if (!ft_strncmp(cmd_st.args[0], "pwd", 4))
 			handle_pwd(cmd_st);
 		else

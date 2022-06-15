@@ -106,13 +106,13 @@ int		print_export(char **env);
 void	free_env(char **env);
 int		envlen(char **env);
 char	**dup_env(char **env);
-void	handle_env(char **env);
+void	handle_env(char **env, t_command cmd_st);
 
 /* pwd.c */
 void	handle_pwd(t_command cmd_st);
 
 /* echo.c */
-void	handle_echo(char **args);
+void	handle_echo(char **args, t_command cmd_st);
 
 /* exit.c */
 void	error_sentence(char *str, int status);
