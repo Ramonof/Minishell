@@ -1,7 +1,7 @@
 NAME := minishell
 LIBFT := libft/libft.a
 CC := gcc
-CFLAGS := -Werror -Wall -Wextra -c -lreadline
+CFLAGS := -Werror -Wall -Wextra -c
 SRC_DIR := ./srcs/
 GNL_DIR := ./gnl/
 EXEC_DIR := ./executor/
@@ -78,16 +78,16 @@ obj: $(SRCS)
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER) -MMD -lreadline
+	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER) -MMD
 
 $(OBJ_DIR)%.o: $(GNL_DIR)%.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER) -MMD -lreadline
+	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER) -MMD
 
 $(OBJ_DIR)%.o: $(EXEC_DIR)%.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER) -MMD -lreadline
+	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER) -MMD
 
 $(OBJ_DIR)%.o: $(PARS_DIR)%.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER) -MMD -lreadline
+	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER) -MMD
 
 $(NAME): obj $(OBJS) $(LIBFT)
 	$(CC) $(OBJS) $(LIBFT) -o $(NAME) -lreadline
