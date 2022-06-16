@@ -18,7 +18,7 @@ int	cd_minus(t_data *data)
 
 	index = var_index("OLDPWD=", data);
 	if (index < 0
-		|| chdir((strchr(data->env[index], '=') + 1)) == -1)
+		|| chdir((ft_strchr(data->env[index], '=') + 1)) == -1)
 	{
 		return (0);
 	}
@@ -28,8 +28,11 @@ int	cd_minus(t_data *data)
 
 int	cd_alone(t_data *data)
 {
-	if (var_index("HOME=", data) < 0
-		|| chdir((strchr(data->env[var_index("HOME=", data)], '=') + 1)) == -1)
+	int	index;
+
+	index = var_index("HOME=", data);
+	if (index < 0
+		|| chdir((ft_strchr(data->env[index], '=') + 1)) == -1)
 	{
 		return (0);
 	}

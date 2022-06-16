@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   str_comp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etobias <etobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/08 00:25:21 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/16 16:09:00 by etobias          ###   ########.fr       */
+/*   Created: 2022/06/16 16:37:14 by etobias           #+#    #+#             */
+/*   Updated: 2022/06/16 16:37:15 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	set_signal_handling(void)
+int	str_comp(const char *s1, const char *s2, size_t n)
 {
-	signal(SIGQUIT, &sig_quit);
-	signal(SIGINT, &sig_int);
-}
-
-void	reset_signal_handling(void)
-{
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGINT, SIG_DFL);
-}
-
-void	sig_quit(int code)
-{
-	code += 0;
-}
-
-void	sig_int(int code)
-{
-	ft_putstr_fd("\n>> ", 1);
-	code += 0;
+	if (!s1 || !s2)
+		return (-1);
+	while ((*s1 || *s2) && (n > 0))
+	{
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		s1++;
+		s2++;
+		n--;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

@@ -181,7 +181,12 @@ int		check_line(char *line);
 int		check_tokens(t_app *app);
 
 /* signals.c */
+void	set_signal_handling(void);
+void	reset_signal_handling(void);
 void	sig_quit(int code);
 void	sig_int(int code);
+
+/* str_comp.c */
+int		str_comp(const char *s1, const char *s2, size_t n);
 
 #endif

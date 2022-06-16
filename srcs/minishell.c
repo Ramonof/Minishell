@@ -13,8 +13,6 @@
 #include "get_next_line.h"
 #include "minishell.h"
 
-static void	set_signal_handling(void);
-static void	reset_signal_handling(void);
 static void	free_pwd_env(t_data *data);
 
 int	g_status = 0;
@@ -23,7 +21,7 @@ void	main_cycle(t_app app, char **envpd, t_data data)
 {
 	while (app.line)
 	{
-		if (strlen(app.line) > 0)
+		if (ft_strlen(app.line) > 0)
 		{
 			if (check_line(app.line))
 			{
@@ -53,8 +51,9 @@ int	main(int argc, char **argv, char **envp)
 	t_app	app;
 	t_data	data;
 
-	if ((argc || argv) && envp)
-		envpd = init_env(envp);
+	if (!(argc || argv) || !envp)
+		error_exit("NULL main args\n");
+	envpd = init_env(envp);
 	if (!envpd)
 		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
 	data.env = envpd;
@@ -68,18 +67,6 @@ int	main(int argc, char **argv, char **envp)
 	main_cycle(app, envpd, data);
 	free_pwd_env(&data);
 	return (0);
-}
-
-static void	set_signal_handling(void)
-{
-	signal(SIGQUIT, &sig_quit);
-	signal(SIGINT, &sig_int);
-}
-
-static void	reset_signal_handling(void)
-{
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGINT, SIG_DFL);
 }
 
 static void	free_pwd_env(t_data *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: etobias <etobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 11:56:18 by mrolande          #+#    #+#             */
-/*   Updated: 2022/06/15 21:54:21 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:25:08 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	export_alone(t_data *data)
 	while (temp_env[i + 1])
 	{
 		j = i + 1;
-		if (strcmp(temp_env[i], temp_env[j]) > 0)
+		if (str_comp(temp_env[i], temp_env[j], ft_strlen(temp_env[i])) > 0)
 		{
 			swap = temp_env[j];
 			temp_env[j] = temp_env[i];
