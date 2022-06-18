@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:24:59 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/18 13:29:55 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 20:32:01 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	*get_var(char **envp, char *varname)
 
 	if (ft_strcmp(varname, "?") == 0)
 	{
-		var = ft_itoa(g_status);
+		var = ft_itoa(g_status.exit_code);
 		return (var);
 	}
 	i = 0;

@@ -15,7 +15,7 @@
 
 static void	free_pwd_env(t_data *data);
 
-int	g_status = 0;
+t_status	g_status;
 
 void	main_cycle(t_app app, char **envpd, t_data data)
 {
@@ -41,7 +41,6 @@ void	main_cycle(t_app app, char **envpd, t_data data)
 		}
 		set_signal_handling();
 		app.line = readline(">> ");
-		//reset_signal_handling();
 	}
 }
 
@@ -51,6 +50,8 @@ int	main(int argc, char **argv, char **envp)
 	t_app	app;
 	t_data	data;
 
+	g_status.exit_code = 0;
+	g_status.pid = 0;
 	if (!(argc || argv) || !envp)
 		error_exit("NULL main args\n");
 	envpd = init_env(envp);
@@ -63,7 +64,6 @@ int	main(int argc, char **argv, char **envp)
 		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
 	set_signal_handling();
 	app.line = readline(">> ");
-	//reset_signal_handling();
 	main_cycle(app, envpd, data);
 	free_pwd_env(&data);
 	return (0);

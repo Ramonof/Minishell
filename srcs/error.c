@@ -32,9 +32,9 @@ void	errno_exit(char *err)
 	exit (errno);
 }
 
-void	perror_sentence(char *err, int status)
+void	perror_sentence(char *err, int code)
 {
-	g_status = status;
+	g_status.exit_code = code;
 	perror(err);
 }
 

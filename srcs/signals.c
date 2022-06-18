@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:25:21 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/18 14:21:10 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 20:53:25 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,25 @@ void	set_signal_handling(void)
 	signal(SIGINT, &sig_int);
 }
 
-void	reset_signal_handling(void)
-{
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGINT, SIG_DFL);
-}
-
 void	sig_quit(int code)
 {
 	code += 0;
-	printf(">> ");
+	if (g_status.pid == 0)
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
 void	sig_int(int code)
 {
-	ft_putstr_fd("\n>> ", 1);
 	code += 0;
+	if (g_status.pid == 0)
+	{
+		ft_putstr_fd("\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }

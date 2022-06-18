@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 11:29:41 by mrolande          #+#    #+#             */
-/*   Updated: 2022/06/08 00:34:13 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 20:32:01 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	handle_pwd(t_command cmd_st)
 	cwd = getcwd(NULL, 0);
 	ft_putstr_fd(cwd, cmd_st.output_desc);
 	ft_putstr_fd("\n", cmd_st.output_desc);
-	g_status = 0;
+	g_status.exit_code = 0;
 	free(cwd);
 }

@@ -67,5 +67,5 @@ void	handle_cd(char **args, t_data *data)
 		if (!cd_path(args, data))
 			return (error_sentence("cd: no such file or directory\n", 1));
 	}
-	g_status = 0;
+	g_status.exit_code = 0;
 }

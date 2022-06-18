@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 12:22:31 by mrolande          #+#    #+#             */
-/*   Updated: 2022/06/18 13:51:44 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 20:32:01 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	handle_env(char **env, t_command cmd_st)
 	char	*str;
 
 	i = 0;
-	g_status = 0;
+	g_status.exit_code = 0;
 	if (!env)
 		return ;
 	while (env[i])

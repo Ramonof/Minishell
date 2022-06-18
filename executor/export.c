@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 11:56:18 by mrolande          #+#    #+#             */
-/*   Updated: 2022/06/18 13:37:19 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 20:32:01 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,5 @@ void	handle_export(char **inputs, t_data *data)
 	}
 	else
 		export_alone(data);
-	g_status = 0;
+	g_status.exit_code = 0;
 }

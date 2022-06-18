@@ -71,7 +71,13 @@ typedef struct s_app
 	t_data		*data;
 }	t_app;
 
-extern int		g_status;
+typedef struct s_status
+{
+	int	exit_code;
+	int	pid;
+}	t_status;
+
+extern t_status	g_status;
 
 /* init_env.c */
 char	**init_env(char **envp);
@@ -122,7 +128,7 @@ void	handle_pwd(t_command cmd_st);
 void	handle_echo(char **args, t_command cmd_st);
 
 /* exit.c */
-void	error_sentence(char *str, int status);
+void	error_sentence(char *str, int code);
 void	handle_exit(char **inputs, t_data *data);
 
 /* tokens_check.c */
@@ -135,7 +141,7 @@ void	error_exit(char *err);
 int		ret_err(char *msg);
 char	**ret_err_char(char *msg);
 void	void_err(char *msg);
-void	perror_sentence(char *err, int status);
+void	perror_sentence(char *err, int code);
 
 /* strcmp.c */
 int		ft_strcmp(const char *str1, const char *str2);

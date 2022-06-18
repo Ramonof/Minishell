@@ -64,9 +64,9 @@ void	handle_exec_type(t_pipex p, t_command cmd_st, char **envp)
 void	my_execute(t_app app, char **envp)
 {
 	t_pipex	pipex;
-	int		status;
+	int		code;
 
-	init_p(&status, &pipex, app);
+	init_p(&code, &pipex, app);
 	pipex.pipe = (int *)malloc(sizeof(int) * pipex.pipe_nmbs);
 	pipex.env_path = find_path(envp);
 	pipex.cmd_paths = ft_split(pipex.env_path, ':');
@@ -83,8 +83,9 @@ void	my_execute(t_app app, char **envp)
 	}
 	close_pipes(&pipex);
 	while (pipex.idx--)
-		waitpid(-1, &status, 0);
-	g_status = WEXITSTATUS(status);
+		waitpid(-1, &code, 0);
+	g_status.pid = 0;
+	g_status.exit_code = WEXITSTATUS(code);
 	parent_free(&pipex);
 }
 
