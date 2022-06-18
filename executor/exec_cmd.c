@@ -83,6 +83,7 @@ void	exec_cmd(t_pipex p, t_command cmd_st, char **envp)
 {
 	char	*cmd_full;
 
+	reset_signal_handling();
 	cmd_full = get_cmd(p.cmd_paths, cmd_st.args[0]);
 	if (cmd_full)
 		execve(cmd_full, cmd_st.args, envp);

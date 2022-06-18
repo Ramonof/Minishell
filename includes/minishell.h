@@ -22,6 +22,7 @@
 
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/ioctl.h>
 
 # define MALLOC_ERROR "Error : Malloc returned NULL\n"
 # define MALLOC_ERROR_CODE 1
@@ -190,7 +191,7 @@ int		check_tokens(t_app *app);
 /* signals.c */
 void	set_signal_handling(void);
 void	reset_signal_handling(void);
-void	sig_quit(int code);
+void	turn_off_signal_handling(void);
 void	sig_int(int code);
 
 /* str_comp.c */
