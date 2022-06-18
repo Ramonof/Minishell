@@ -41,7 +41,7 @@ void	main_cycle(t_app app, char **envpd, t_data data)
 		}
 		set_signal_handling();
 		app.line = readline(">> ");
-		reset_signal_handling();
+		//reset_signal_handling();
 	}
 }
 
@@ -63,7 +63,7 @@ int	main(int argc, char **argv, char **envp)
 		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
 	set_signal_handling();
 	app.line = readline(">> ");
-	reset_signal_handling();
+	//reset_signal_handling();
 	main_cycle(app, envpd, data);
 	free_pwd_env(&data);
 	return (0);

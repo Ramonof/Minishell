@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etobias <etobias@student.42.fr>            +#+  +:+       +#+        */
+/*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 11:56:18 by mrolande          #+#    #+#             */
-/*   Updated: 2022/06/16 16:25:08 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 13:37:19 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**export_env(char **old_env, char *export)
 	i = 0;
 	new_env = malloc(sizeof(char *) * (envlen(old_env) + 1));
 	if (!new_env)
-		exit(EXIT_FAILURE);
+		error_exit("malloc failed to allocate memory (env)");
 	while (old_env[i])
 	{
 		new_env[i] = ft_strdup(old_env[i]);

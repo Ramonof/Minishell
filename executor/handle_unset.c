@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolande <mrolande@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 11:49:00 by mrolande          #+#    #+#             */
-/*   Updated: 2022/05/29 11:49:00 by mrolande         ###   ########.fr       */
+/*   Updated: 2022/06/18 13:37:38 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**unset_env(char **old_env, int index)
 	j = 0;
 	new_env = malloc(sizeof(char *) * (envlen(old_env) - 1));
 	if (!new_env)
-		exit(EXIT_FAILURE);
+		error_exit("malloc failed to allocate memory (unset)");
 	while (old_env[i])
 	{
 		if (i != index)

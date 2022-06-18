@@ -15,7 +15,7 @@
 void	error_exit(char *err)
 {
 	write(2, err, ft_strlen(err));
-	exit(1);
+	exit(EXIT_FAILURE);
 }
 
 void	msg_pipe(char *err)

@@ -176,6 +176,7 @@ int		start_syntax_checker(t_app *app);
 
 /* check_line.c */
 int		check_line(char *line);
+int		is_space(char c);
 
 /* check_tokens.c */
 int		check_tokens(t_app *app);

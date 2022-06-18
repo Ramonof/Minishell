@@ -6,13 +6,11 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:24:48 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/08 00:24:48 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 13:29:01 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	is_space(char c);
 
 int	check_line(char *line)
 {
@@ -30,7 +28,7 @@ int	check_line(char *line)
 	return (0);
 }
 
-static int	is_space(char c)
+int	is_space(char c)
 {
 	return (c <= ' ' || c > 126);
 }

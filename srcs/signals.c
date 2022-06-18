@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etobias <etobias@student.42.fr>            +#+  +:+       +#+        */
+/*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:25:21 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/16 16:09:00 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 14:21:10 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	reset_signal_handling(void)
 void	sig_quit(int code)
 {
 	code += 0;
+	printf(">> ");
 }
 
 void	sig_int(int code)

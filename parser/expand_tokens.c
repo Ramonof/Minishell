@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:24:59 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/14 12:16:10 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 13:29:55 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	*expand_variable(char **envp, char *token, size_t i)
 
 	j = ++i;
 	while (token[i] && token[i] != '\"' && token[i] != '\''
-		&& token[i] != ' ' && token[i] != '$')
+		&& !is_space(token[i]) && token[i] != '$')
 		i++;
 	temp = str_range_cpy(token, j, i);
 	env = get_var(envp, temp);

@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 12:22:31 by mrolande          #+#    #+#             */
-/*   Updated: 2022/06/08 00:45:50 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 13:51:44 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	**dup_env(char **env)
 	i = 0;
 	data_env = malloc(sizeof(char *) * envlen(env));
 	if (!data_env)
-		exit(EXIT_FAILURE);
+		error_exit("malloc failed to allocate memory (env)");
 	while (env[i])
 	{
 		data_env[i] = ft_strdup(env[i]);

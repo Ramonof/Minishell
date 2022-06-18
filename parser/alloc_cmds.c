@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:23:57 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/08 00:24:01 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 13:38:08 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	alloc_cmds(t_app *app)
 	}
 	app->cmd_number = size;
 	app->cmds = malloc((size + 1) * sizeof(t_command *));
+	if (!app->cmds)
+		error_exit("malloc failed to allocate memory (cmd_array)");
 	alloc_memory(app);
 }
 
@@ -46,6 +48,8 @@ static void	alloc_memory(t_app *app)
 	while (i < (size_t)app->cmd_number)
 	{
 		app->cmds[i] = malloc(sizeof(t_command));
+		if (!app->cmds[i])
+			error_exit("malloc failed to allocate memory (cmd)");
 		init_command(app->cmds[i]);
 		i++;
 	}

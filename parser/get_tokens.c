@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:25:02 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/15 23:12:35 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 13:30:27 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static char	*get_next_token(char *str, size_t *i)
 	char	*token;
 	size_t	j;
 
-	while (str[*i] && str[*i] == ' ')
+	while (str[*i] && is_space(str[*i]))
 		(*i)++;
 	j = *i;
-	while (str[*i] && str[*i] != ' ')
+	while (str[*i] && !is_space(str[*i]))
 	{
 		skip_quotes(str, i);
 		if (find_redirection(str, i, j))

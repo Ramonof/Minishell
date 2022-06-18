@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:25:07 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/08 00:25:08 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 13:39:00 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*str_range_cpy(char *str, size_t start, size_t end)
 	if (!str)
 		return (NULL);
 	new_str = malloc(end - start + 3);
+	if (!new_str)
+		error_exit("malloc failed to allocate memory (range cpy)");
 	i = start;
 	j = 0;
 	while (str[i] && i < end)

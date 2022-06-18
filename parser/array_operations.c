@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:24:42 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/08 00:24:42 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 13:38:47 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	**array_add(char **array, char *str)
 	if (len == 0)
 		len++;
 	new_array = malloc((len + 1) * sizeof(char *));
+	if (!new_array)
+		error_exit("malloc failed to allocate memory (array add)");
 	i = 0;
 	while (array && array[i])
 	{
@@ -29,6 +31,8 @@ char	**array_add(char **array, char *str)
 		i++;
 	}
 	new_array[i++] = ft_strdup(str);
+	if (str && !new_array[i - 1])
+		error_exit("malloc failed to allocate memory (array add)");
 	new_array[i] = NULL;
 	if (array)
 		free(array);
@@ -43,6 +47,8 @@ char	**array_remove(char **array, size_t index)
 
 	length = array_len(array) - 1;
 	new_array = malloc(length * sizeof(char *));
+	if (!new_array)
+		error_exit("malloc failed to allocate memory (array remove)");
 	i = 0;
 	while (i < index)
 	{
