@@ -6,7 +6,7 @@
 /*   By: etobias <etobias@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:25:21 by etobias           #+#    #+#             */
-/*   Updated: 2022/06/18 20:53:25 by etobias          ###   ########.fr       */
+/*   Updated: 2022/06/18 21:35:20 by etobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	sig_quit(int code)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+	else
+		ft_putchar_fd('\n', 1);
 }
 
 void	sig_int(int code)
@@ -39,4 +41,6 @@ void	sig_int(int code)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+	else
+		ft_putchar_fd('\n', 1);
 }
