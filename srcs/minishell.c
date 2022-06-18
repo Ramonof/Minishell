@@ -17,7 +17,7 @@ static void	free_pwd_env(t_data *data);
 
 t_status	g_status;
 
-void	main_cycle(t_app app, char **envpd, t_data data)
+void	main_cycle(t_app app, char **envpd, t_data *data)
 {
 	while (app.line)
 	{
@@ -28,12 +28,12 @@ void	main_cycle(t_app app, char **envpd, t_data data)
 				add_history(app.line);
 				if (start_parser(&app))
 				{
-					start_my_execute(app, envpd, &data);
+					start_my_execute(app, envpd, data);
 				}
 				free_cmds(&app);
 			}
 		}
-		envpd = data.env;
+		envpd = data->env;
 		if (app.line)
 		{
 			free(app.line);
@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
 	set_signal_handling();
 	app.line = readline(">>");
-	main_cycle(app, envpd, data);
+	main_cycle(app, envpd, &data);
 	free_pwd_env(&data);
 	return (0);
 }

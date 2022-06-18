@@ -95,8 +95,6 @@ void	start_my_execute(t_app app, char **envp, t_data *data)
 		my_execute(app, envp);
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "cd", 3))
 		handle_cd(app.cmds[0][0].args, data);
-	else if (!ft_strncmp(app.cmds[0][0].args[0], "test", 5))
-		printf("memory test\n");
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "unset", 6))
 		handle_unset(app.cmds[0][0].args, data);
 	else if (!ft_strncmp(app.cmds[0][0].args[0], "export", 7))
