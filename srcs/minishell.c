@@ -40,7 +40,7 @@ void	main_cycle(t_app app, char **envpd, t_data *data)
 			app.line = NULL;
 		}
 		set_signal_handling();
-		app.line = readline(">>");
+		app.line = readline(">> ");
 	}
 }
 
@@ -63,7 +63,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!data.pwd)
 		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
 	set_signal_handling();
-	app.line = readline(">>");
+	app.line = readline(">> ");
 	main_cycle(app, envpd, &data);
 	free_pwd_env(&data);
 	return (0);
