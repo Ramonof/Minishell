@@ -52,6 +52,7 @@ int	main(int argc, char **argv, char **envp)
 
 	g_status.exit_code = 0;
 	g_status.pid = 0;
+	envpd = 0;
 	if ((argc || argv) && envp)
 		envpd = init_env(envp);
 	if (!envpd)
