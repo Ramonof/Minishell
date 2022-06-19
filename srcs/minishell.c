@@ -52,9 +52,8 @@ int	main(int argc, char **argv, char **envp)
 
 	g_status.exit_code = 0;
 	g_status.pid = 0;
-	if (!(argc || argv) || !envp)
-		error_exit("NULL main args\n");
-	envpd = init_env(envp);
+	if ((argc || argv) && envp)
+		envpd = init_env(envp);
 	if (!envpd)
 		error_sentence(MALLOC_ERROR, MALLOC_ERROR_CODE);
 	data.env = envpd;
