@@ -73,12 +73,14 @@ static void	free_pwd_env(t_data *data)
 {
 	size_t	i;
 
-	free(data->pwd);
+	if (data->pwd)
+		free(data->pwd);
 	i = 0;
-	while (data->env[i])
+	while (data->env && data->env[i])
 	{
 		free(data->env[i]);
 		i++;
 	}
-	free(data->env);
+	if (data->env)
+		free(data->env);
 }
