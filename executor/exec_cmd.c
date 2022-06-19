@@ -46,15 +46,11 @@ static void	sub_dup2(t_command cmd_st, int zero, int first)
 		first = cmd_st.output_desc;
 	if (dup2(zero, 0) < 0)
 	{
-		printf("exit\n");
-		error_exit("dup2");
-		exit(1);
+		errno_exit("Pipe");
 	}
 	if (dup2(first, 1) < 0)
 	{
-		printf("exit\n");
-		error_exit("dup2");
-		exit(1);
+		errno_exit("Pipe");
 	}
 }
 
