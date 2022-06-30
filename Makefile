@@ -1,7 +1,7 @@
 NAME := minishell
 LIBFT := libft/libft.a
 CC := gcc
-CFLAGS := -Werror -Wall -Wextra -c
+CFLAGS := -Wall -Wextra -Werror -c
 SRC_DIR := ./srcs/
 GNL_DIR := ./gnl/
 EXEC_DIR := ./executor/
@@ -90,7 +90,7 @@ $(OBJ_DIR)%.o: $(PARS_DIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER) -MMD
 
 $(NAME): obj $(OBJS) $(LIBFT)
-	$(CC) $(OBJS) $(LIBFT) -o $(NAME) -lreadline
+	$(CC) $(OBJS) $(LIBFT) -o $(NAME) -lreadline -L/Users/$(USER)/.brew/Cellar/readline/8.1.2/lib/ -I/Users/$(USER)/.brew/Cellar/readline/8.1.2/include
 
 $(LIBFT): libft
 	$(MAKE) -C ./libft

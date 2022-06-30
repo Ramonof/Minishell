@@ -31,6 +31,7 @@ void	main_cycle(t_app app, char **envpd, t_data *data)
 					start_my_execute(app, envpd, data);
 				}
 				free_cmds(&app);
+				unlink(".heredoc_tmp");
 			}
 		}
 		envpd = data->env;

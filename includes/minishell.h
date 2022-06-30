@@ -80,6 +80,8 @@ typedef struct s_status
 
 extern t_status	g_status;
 
+void	rl_replace_line(const char *a, int b);
+
 /* init_env.c */
 char	**init_env(char **envp);
 char	*find_pwd(char **envp);
